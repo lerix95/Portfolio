@@ -1,671 +1,463 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Валерий Проценко — Дизайн-инженер</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valeriy Protsenko — Design Engineer</title>
+<meta name="description" content="I design and build products — from the first concept in Figma to a working project in production.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Reenie+Beanie&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&display=swap" rel="stylesheet">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='black'/%3E%3C/svg%3E">
 <style>
 /* ─── TOKENS ─── */
 :root{
-  --c-primary:#000;--c-secondary:#6c6c6c;
-  --c-bg:#fff;--c-surface:#f5f5f5;
-  --c-border:#cfcfcf;--c-accent:#ff00ae;
-  --font:'Inter',-apple-system,sans-serif;
-  --font-hand:'Reenie Beanie',cursive;
-  --col-w:616px;--col-l:332px;--page-max:1280px;
-  --tr:150ms ease;
-}
-[data-theme="dark"]{
-  --c-primary:#fff;--c-secondary:#8a8a8a;
-  --c-bg:#0f0f0f;--c-surface:#1c1c1c;--c-border:#333;
+  --primary:#000;
+  --secondary:#6c6c6c;
+  --muted:#c2c2c2;
+  --surface:#f5f5f5;
+  --card:#fafafa;
+  --bg:#fff;
+  --w:880px;
+  --hh:60px; /* header height, updated by JS */
 }
 
 /* ─── RESET ─── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-font-smoothing:antialiased;overflow-x:hidden}
-body{font-family:var(--font);background:var(--c-bg);color:var(--c-primary);
-     transition:background .2s,color .2s;min-height:100vh;overflow-x:hidden}
-button{background:none;border:none;cursor:pointer;font-family:inherit}
+html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;font-weight:460;background:var(--bg);color:var(--primary);overflow-x:hidden}
 a{color:inherit;text-decoration:none}
+button{font:inherit;background:none;border:none;cursor:pointer;color:inherit}
+h1,h2{font:inherit}
+img,video{display:block;max-width:100%}
+:focus-visible{outline:2px solid var(--primary);outline-offset:3px}
 
-/* ─── HEADER ─── */
-.header{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-}
-.header-inner{
-  max-width:var(--page-max);margin:0 auto;
-  padding:0 20px;height:40px;
-  display:flex;align-items:center;justify-content:space-between;
-}
-.header-normal{display:flex;align-items:center;justify-content:space-between;width:100%}
-.nav-links{display:flex;gap:20px;align-items:center}
-.nav-link{
-  font-size:13px;font-weight:400;line-height:16px;
-  color:var(--c-primary);white-space:nowrap;cursor:pointer;
-  text-decoration:underline;
-  text-decoration-color:transparent;
-  text-underline-offset:2px;
-  transition:text-decoration-color var(--tr);
-  user-select:none;
-}
-.nav-link:hover{text-decoration-color:var(--c-border)}
-.nav-link.active{text-decoration-color:var(--c-primary)}
-.header-right{display:flex;align-items:center;gap:20px}
-.lang-btn{
-  font-size:13px;font-weight:400;line-height:16px;color:var(--c-primary);
-  text-decoration:underline;text-decoration-color:var(--c-primary);text-underline-offset:2px;
-  transition:opacity var(--tr);
-}
-.lang-btn:hover{opacity:.6}
-.theme-btn{width:16px;height:16px;border-radius:12px;overflow:hidden;
-           display:flex;align-items:center;justify-content:center}
-.theme-dot{width:10px;height:10px;border-radius:12px;background:var(--c-primary);
-           transition:background .2s;pointer-events:none}
-.header-case{display:none;align-items:center;justify-content:space-between;width:100%}
-.header-case.visible{display:flex}
-.back-btn{
-  display:inline-flex;align-items:center;gap:4px;cursor:pointer;border:none;background:none;
-  font-size:13px;font-weight:400;line-height:16px;
-  color:var(--c-secondary);transition:color var(--tr);padding:0;
-}
-.back-btn:hover{color:var(--c-primary)}
-.back-icon{
-  width:12px;height:12px;flex-shrink:0;display:block;
-  background-image:url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4.71434 10.2857L1.28577 6.85714L4.71434 3.42857M1.28577 6.85714H8.57148C9.75494 6.85714 10.7143 5.89775 10.7143 4.71429C10.7143 3.53082 9.75494 2.57143 8.57148 2.57143H7.28577' stroke='%236C6C6C'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:center;background-size:contain;
-}
-[data-theme="dark"] .back-icon{
-  background-image:url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4.71434 10.2857L1.28577 6.85714L4.71434 3.42857M1.28577 6.85714H8.57148C9.75494 6.85714 10.7143 5.89775 10.7143 4.71429C10.7143 3.53082 9.75494 2.57143 8.57148 2.57143H7.28577' stroke='%238a8a8a'/%3E%3C/svg%3E");
-}
-.back-btn:hover .back-icon{
-  background-image:url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4.71434 10.2857L1.28577 6.85714L4.71434 3.42857M1.28577 6.85714H8.57148C9.75494 6.85714 10.7143 5.89775 10.7143 4.71429C10.7143 3.53082 9.75494 2.57143 8.57148 2.57143H7.28577' stroke='%23000'/%3E%3C/svg%3E");
-}
-[data-theme="dark"] .back-btn:hover .back-icon{
-  background-image:url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4.71434 10.2857L1.28577 6.85714L4.71434 3.42857M1.28577 6.85714H8.57148C9.75494 6.85714 10.7143 5.89775 10.7143 4.71429C10.7143 3.53082 9.75494 2.57143 8.57148 2.57143H7.28577' stroke='%23fff'/%3E%3C/svg%3E");
-}
+/* ─── HEADER (fixed on all devices) ─── */
+.hdr{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,.36);-webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px)}
+.hdr-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:18px 30px}
+.hdr-left{display:flex;align-items:center;gap:80px;min-width:0}
+.hdr-name{font-weight:600;font-size:15px;line-height:24px;white-space:nowrap}
+.hdr-sub{font-size:14px;line-height:20px;color:var(--secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.hdr-links{display:flex;gap:12px;flex-shrink:0}
+.pill{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--surface);border-radius:20px;padding:8px 18px;font-size:14px;line-height:20px;color:var(--secondary);white-space:nowrap;transition:color .15s ease,background .15s ease}
+.pill:hover{color:var(--primary);background:#ededed}
+.pill-back{padding:8px 18px 8px 12px}
+.pill-back svg{width:16px;height:16px;flex-shrink:0}
+.hdr-case{display:none}
+body.is-case .hdr-home{display:none}
+body.is-case .hdr-case{display:flex}
 
-/* ─── PAGE SYSTEM ─── */
-.page{display:none;animation:fadeIn 220ms ease both}
-.page.active{display:block}
-@keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+/* ─── LAYOUT ─── */
+.wrap{width:min(var(--w),calc(100% - 80px));margin:0 auto}
+.view{display:none}
+.view.active{display:block}
 
-/* ─── COLUMN LAYOUT ─── */
-.layout{padding-top:40px;min-height:100vh;display:flex;flex-direction:column}
-.col{
-  flex:1;width:100%;max-width:var(--page-max);margin:0 auto;
-  padding-top:120px;padding-left:var(--col-l);padding-right:var(--col-l);
-  display:flex;flex-direction:column;
-}
-.col-inner{width:var(--col-w);display:flex;flex-direction:column;gap:40px;flex:1}
+/* ─── HOME ─── */
+.home{padding-top:192px}
+.intro{font-size:30px;line-height:40px;margin-bottom:80px}
+.grid{display:grid;grid-template-columns:1fr 1fr;column-gap:20px;row-gap:40px}
+.card{display:flex;flex-direction:column;gap:16px;align-items:center}
+.card-img{width:100%;aspect-ratio:430/364;border-radius:32px;background:var(--card);overflow:hidden}
+.card-img img{width:100%;height:100%;object-fit:cover}
+.card-meta{display:flex;flex-direction:column;gap:4px;align-items:center;text-align:center;min-height:48px}
+.card-name{font-weight:500;font-size:16px;line-height:24px}
+.card-sub{font-size:14px;line-height:20px;color:var(--secondary)}
+.card-soon .card-img{display:flex;align-items:center;justify-content:center;font-size:14px;line-height:20px;color:var(--muted)}
+.footer{text-align:center;font-size:13px;line-height:20px;color:var(--muted);padding:100px 0 40px}
 
-/* ─── FOOTER ─── */
-.site-footer{
-  width:100%;max-width:var(--page-max);margin:0 auto;
-  padding:40px var(--col-l) 20px var(--col-l);
-}
-.footer-inner{width:var(--col-w);padding:0 8px}
-.footer-text{font-size:12px;font-weight:400;line-height:16px;color:var(--c-secondary);white-space:nowrap}
-
-/* ─── BIO ─── */
-.bio-head{display:flex;flex-direction:column;gap:4px;padding:0 8px}
-.bio-body{display:flex;flex-direction:column;gap:20px;padding:0 8px}
-.bio-text{font-size:14px;font-weight:400;line-height:20px}
-.t-medium{font-size:14px;font-weight:500;line-height:20px}
-.t-second{color:var(--c-secondary)}
-.link-u{
-  color:var(--c-primary);text-decoration:underline;
-  text-decoration-color:var(--c-border);text-underline-offset:2px;
-  transition:text-decoration-color var(--tr);cursor:pointer;
-}
-.link-u:hover{text-decoration-color:var(--c-primary)}
-
-/* ─── CASES LIST ─── */
-.cases-section{display:flex;flex-direction:column;gap:8px}
-.cases-head{padding:0 8px;font-size:14px;font-weight:400;line-height:20px;color:var(--c-secondary)}
-.cases-list{display:flex;flex-direction:column}
-.case-row{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:8px;border-radius:8px;
-  cursor:pointer;transition:background var(--tr);height:36px;
-}
-.case-row:hover{background:var(--c-surface)}
-.case-row:nth-child(1){animation:fadeIn 280ms 30ms ease both}
-.case-row:nth-child(2){animation:fadeIn 280ms 60ms ease both}
-.case-row:nth-child(3){animation:fadeIn 280ms 90ms ease both}
-.case-row:nth-child(4){animation:fadeIn 280ms 120ms ease both}
-.case-row:nth-child(5){animation:fadeIn 280ms 150ms ease both}
-.case-row:nth-child(6){animation:fadeIn 280ms 180ms ease both}
-.case-type{font-size:14px;font-weight:400;line-height:20px;color:var(--c-secondary);white-space:nowrap;flex-shrink:0}
-.case-info{display:flex;align-items:center;justify-content:space-between;width:440px;flex-shrink:0}
-.case-name-wrap{display:flex;align-items:center;gap:4px}
-.case-name{font-size:14px;font-weight:500;line-height:20px;white-space:nowrap}
-.case-cat{font-size:14px;font-weight:400;line-height:20px;color:var(--c-secondary);white-space:nowrap;text-align:right}
-
-/* ─── NDA BADGE ─── */
-.badge{display:inline-flex;align-items:center;justify-content:center;height:18px;flex-shrink:0;margin-top:-1px}
-.badge-text{
-  font-family:var(--font-hand);font-size:18px;font-weight:400;line-height:1;
-  color:var(--c-accent);letter-spacing:0.5px;white-space:nowrap;
-  -webkit-text-stroke:0.25px var(--c-accent);text-decoration:none;
-}
-
-/* ─── CASE PAGES ─── */
-.case-layout{padding-top:40px;min-height:100vh;display:flex;flex-direction:column}
-.sidebar-wrap{display:contents}
-.case-sidebar{
-  position:fixed;top:160px;
-  left:max(20px, calc(50vw - 620px));
-  width:200px;
-  display:flex;flex-direction:column;gap:12px;
-  z-index:80;
-}
-.sidebar-item{
-  font-size:13px;font-weight:400;line-height:16px;
-  color:var(--c-secondary);cursor:pointer;transition:color var(--tr);
-  user-select:none;
-}
-.sidebar-item:hover,.sidebar-item.active{color:var(--c-primary)}
-@media(max-width:820px){.case-sidebar{display:none!important}}
-
-.case-col{
-  flex:1;width:100%;max-width:var(--page-max);margin:0 auto;
-  padding-top:120px;padding-bottom:80px;
-  padding-left:var(--col-l);padding-right:var(--col-l);
-}
-.case-inner{width:var(--col-w);display:flex;flex-direction:column}
-
-.case-intro{padding:0 8px;margin-bottom:64px}
-.case-title{font-size:14px;font-weight:500;line-height:20px}
-.case-type-lbl{font-size:14px;font-weight:400;line-height:20px;color:var(--c-secondary);margin-top:4px;margin-bottom:40px}
-.case-intro-body{display:flex;flex-direction:column;gap:20px}
-.case-intro-text{font-size:14px;font-weight:400;line-height:20px}
-
-.case-block{margin-bottom:60px;padding:0 8px}
-.case-block-title{font-size:14px;font-weight:500;line-height:20px;margin-bottom:8px}
-.case-block-desc{font-size:14px;font-weight:400;line-height:20px;color:var(--c-primary);margin-bottom:24px}
-.case-block-result .case-block-desc{color:var(--c-primary)}
-
-/* ─── IMAGES ─── */
-.img-wrap{margin:0 -8px}
-.img-ph{border-radius:8px;background:var(--c-surface);transition:background .2s;display:block}
-.img-full{width:656px;height:auto;max-height:800px;object-fit:contain;background:transparent}
-img.scr-l,img.scr-r,img.scr-c{object-fit:cover;background:transparent}
-.img-cap{font-size:12px;font-weight:400;line-height:16px;color:var(--c-secondary);margin-top:12px;padding:0 8px;text-align:center}
-
-/* Desktop: pair — two mobile screens side by side */
-.screens-pair{width:656px;height:508px;position:relative;margin:0 -8px}
-.scr{position:absolute;width:245px;height:502px;border-radius:8px;background:var(--c-surface)}
-.scr-l{left:61px;top:2px}
-.scr-r{right:61px;top:2px}
-/* Desktop: single mobile screen centered */
-.screen-single{width:656px;height:508px;position:relative;margin:0 -8px}
-.scr-c{position:absolute;left:205px;top:2px;width:245px;height:502px;border-radius:8px;background:var(--c-surface)}
-/* Desktop: pair-web — two web screens vertically */
-.screens-pair-web{display:flex;flex-direction:column;gap:40px;margin:0 -8px}
-.screens-pair-web img{width:656px;height:auto;border-radius:8px}
+/* ─── CASE ─── */
+.case{padding-top:192px;padding-bottom:160px}
+.c-head{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+.c-title{font-size:30px;line-height:40px}
+.c-sub{font-weight:500;font-size:16px;line-height:24px;color:var(--secondary)}
+.c-cover{width:100%;aspect-ratio:880/745;object-fit:cover;border-radius:64px;background:var(--card)}
+.c-intro{margin-top:32px;font-size:16px;line-height:24px}
+.c-sec{margin-top:120px}
+.c-text{display:flex;flex-direction:column;gap:8px;font-size:16px;line-height:24px}
+.c-sec-title{font-weight:600}
+.c-item{margin-top:12px}
+.c-item + .c-item{margin-top:60px}
+.media{width:100%;height:auto;border-radius:64px;background:var(--card)}
+img.media{cursor:zoom-in}
+.cap{margin-top:12px;text-align:center;font-size:16px;line-height:24px;color:var(--secondary)}
 
 /* ─── LIGHTBOX ─── */
-.lightbox{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.9);z-index:1000;cursor:zoom-out;align-items:center;justify-content:center}
-.lightbox.open{display:flex}
-.lightbox img{max-width:90vw;max-height:90vh;object-fit:contain;border-radius:8px}
+.lb{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.9);align-items:center;justify-content:center;cursor:zoom-out;padding:4vh 4vw}
+.lb.open{display:flex}
+.lb img{max-width:100%;max-height:100%;object-fit:contain;border-radius:12px}
 
-/* ─── CASE NAV ─── */
-.case-nav{padding:0 8px;margin-top:20px;margin-bottom:60px}
-.case-nav-row1{display:flex;justify-content:space-between;margin-bottom:4px}
-.case-nav-row2{display:flex;justify-content:space-between}
-.cnav-dir{font-size:14px;font-weight:400;line-height:20px;color:var(--c-secondary)}
-.cnav-name{font-size:14px;font-weight:500;line-height:20px;color:var(--c-primary);cursor:pointer;transition:color var(--tr)}
-.cnav-name:hover{color:var(--c-secondary)}
-
-/* ─── ABOUT ─── */
-.timeline{display:flex;flex-direction:column;gap:40px;padding:0 8px}
-.tl-year{font-size:14px;font-weight:500;line-height:20px;margin-bottom:8px}
-.tl-desc{font-size:14px;font-weight:400;line-height:20px;color:var(--c-secondary)}
-.about-photo{width:430px;height:auto;border-radius:8px;background:var(--c-surface);display:block;margin:0 auto}
-.about-photo-cap{font-size:12px;font-weight:400;line-height:16px;color:var(--c-secondary);margin-top:12px;text-align:center}
-
-/* ─── CONCEPTS ─── */
-.concept-block{margin-bottom:80px}
-.concept-head{padding:0 8px;margin-bottom:24px}
-.concept-title{font-size:14px;font-weight:500;line-height:20px}
-.concept-desc{font-size:14px;font-weight:400;line-height:20px;color:var(--c-secondary);margin-top:12px}
-.concept-imgs{padding:0 8px;display:flex;flex-direction:column;gap:8px}
-
-/* ─── RESPONSIVE ─── */
-@media(max-width:1100px){
-  .col,.case-col,.site-footer{padding-left:220px;padding-right:40px}
-  .case-sidebar{display:none}
+/* ─── TABLET ─── */
+@media (max-width:1100px){
+  .hdr-left{gap:40px}
 }
 
-@media(max-width:768px){
-  /* Prevent horizontal scroll */
-  html,body{overflow-x:hidden;max-width:100vw}
+/* ─── MOBILE ─── */
+@media (max-width:768px){
+  .hdr-inner{padding:8px 16px}
+  .hdr-home{flex-direction:column;align-items:flex-start;gap:16px}
+  .hdr-left{flex-direction:column;align-items:flex-start;gap:8px}
+  .hdr-sub{white-space:normal;overflow:visible}
+  .wrap{width:calc(100% - 32px)}
 
-  /* Header — fixed with background */
-  .header{background:var(--c-bg);transition:background .2s}
+  .home{padding-top:calc(var(--hh) + 40px)}
+  .intro{font-size:20px;line-height:28px;margin-bottom:40px}
+  .grid{grid-template-columns:1fr;row-gap:40px}
+  .card-img{border-radius:24px}
+  .footer{padding:60px 0 32px}
 
-  /* Layout — 16px paddings */
-  .col,.case-col{padding-left:16px;padding-right:16px;padding-top:72px}
-  .site-footer{padding-left:16px;padding-right:16px}
-  .col-inner,.case-inner{width:100%;max-width:100%}
-
-  /* Sidebar — hide */
-  .case-sidebar{display:none!important}
-
-  /* Cases list */
-  .case-row{height:auto;min-height:44px;display:flex;align-items:center}
-  .case-type{width:80px;min-width:80px;max-width:80px;flex-shrink:0}
-  .case-info{display:flex;align-items:center;justify-content:space-between;flex:1;margin-left:20px;width:0;min-width:0}
-  .case-info .case-name-wrap{flex:1;min-width:0}
-  .case-name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .case-cat{white-space:nowrap;flex-shrink:0;margin-left:8px}
-
-  /* Full-width web images */
-  .img-wrap{margin:0}
-  .img-full{width:100%;max-width:100%;height:auto}
-
-  /* Pair of mobile screens — vertical, centered, 245px wide */
-  .screens-pair{
-    width:100%;height:auto;
-    display:flex;flex-direction:column;align-items:center;
-    gap:24px;margin:0;position:static;
-  }
-  .scr{position:static;width:245px;height:auto;min-height:480px}
-  .scr-l,.scr-r{left:auto;right:auto;top:auto}
-
-  /* Single mobile screen — centered, 245px */
-  .screen-single{width:100%;height:auto;margin:0;position:static}
-  .scr-c{
-    position:static;width:245px;height:auto;min-height:480px;
-    margin:0 auto;display:block;left:auto;top:auto;
-  }
-
-  /* Pair-web — full width, vertical */
-  .screens-pair-web{margin:0;gap:24px}
-  .screens-pair-web img{width:100%;height:auto}
-
-  /* Concepts images */
-  .concept-imgs img{width:100%!important;height:auto!important}
-  .concept-imgs div[style*="display:flex"]{flex-direction:column!important}
-  .concept-imgs div[style*="display:flex"] img{flex:none!important;width:245px!important;margin:0 auto;display:block}
-
-  /* About photo */
-  .about-photo{width:100%;height:auto}
-
-  /* Footer */
-  .footer-inner{width:100%}
+  .case{padding-top:calc(var(--hh) + 40px);padding-bottom:100px}
+  .c-cover,.media{border-radius:24px}
+  .c-intro{margin-top:16px}
+  .c-sec{margin-top:100px}
+  .c-item + .c-item{margin-top:40px}
 }
 
-@media(max-width:540px){
-  .nav-links{gap:12px}
-  .case-row{flex-wrap:nowrap}
-  .case-type{font-size:14px}
-  .case-info{flex-direction:row;align-items:center;justify-content:space-between}
-  .case-cat{font-size:14px}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important}
 }
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<header class="header">
-  <div class="header-inner">
-    <div class="header-normal" id="headerNormal">
-      <nav class="nav-links">
-        <span class="nav-link active" data-page="home" data-ru="Главная" data-en="Home" onclick="showPage('home',this)">Главная</span>
-        <span class="nav-link" data-page="concepts" data-ru="Концепты" data-en="Concepts" onclick="showPage('concepts',this)">Концепты</span>
-        <span class="nav-link" data-page="about" data-ru="Обо мне" data-en="About" onclick="showPage('about',this)">Обо мне</span>
-        <span class="nav-link" data-page="cv" data-ru="Резюме" data-en="CV" onclick="showPage('cv',this)">Резюме</span>
-      </nav>
-      <div class="header-right">
-        <button class="lang-btn" id="langBtn" onclick="toggleLang()">RU</button>
-        <button class="theme-btn" onclick="toggleTheme()"><span class="theme-dot"></span></button>
-      </div>
+<!-- ══ HEADER ══ -->
+<header class="hdr" id="hdr">
+  <div class="hdr-inner hdr-home">
+    <div class="hdr-left">
+      <a class="hdr-name" href="/">Valeriy Protsenko</a>
+      <p class="hdr-sub">I design and build products — from the first concept in Figma to a working project in production.</p>
     </div>
-    <div class="header-case" id="headerCase">
-      <button class="back-btn" onclick="goHome()">
-        <span class="back-icon"></span>
-        <span id="backLabel">Главная</span>
-      </button>
-      <div class="header-right">
-        <button class="lang-btn" id="langBtn2" onclick="toggleLang()">RU</button>
-        <button class="theme-btn" onclick="toggleTheme()"><span class="theme-dot"></span></button>
-      </div>
-    </div>
+    <nav class="hdr-links">
+      <a class="pill" href="https://docs.google.com/document/d/1jUiJ3xgQ7YLItNGBhoLgZ8bpKq3Htabm/edit" target="_blank" rel="noopener">CV</a>
+      <a class="pill" href="https://www.linkedin.com/in/valprotsenko" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="pill" href="https://github.com/lerix095" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+  </div>
+  <div class="hdr-inner hdr-case">
+    <button class="pill pill-back" id="backBtn" type="button">
+      <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3.5 5.5 8l4.5 4.5" stroke="#6c6c6c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back
+    </button>
   </div>
 </header>
 
 <!-- ══ HOME ══ -->
-<div class="page active" id="page-home">
-  <div class="layout">
-    <div class="col">
-      <div class="col-inner">
-        <section style="display:flex;flex-direction:column;gap:20px">
-          <div class="bio-head">
-            <p class="t-medium" id="bio-name">Валерий Проценко</p>
-            <p class="bio-text t-second" id="bio-role">Дизайн-инженер</p>
-          </div>
-          <div class="bio-body">
-            <p class="bio-text" id="bio-1">Lead Product Designer в <a class="link-u" href="https://bibip.io/" target="_blank" rel="noopener">Bibip</a>, принимаю ключевые дизайн-решения, строю продукт.</p>
-            <p class="bio-text" id="bio-2">Специализируюсь на продуктовом дизайне и iOS-разработке. Основной фокус — дизайн-системы, usability, масштабирование и консистентность. Являюсь «мостом» между UX/UI дизайном и разработкой под iOS.</p>
-            <p class="bio-text" id="bio-3">За 7+ лет опыта я работал как в стартапах, так и в продуктовых компаниях: FinTech, E-commerce, Delivery, EdTech, Esports, Crypto и Web3.</p>
-            <p class="bio-text" id="bio-4">Увлекаюсь технологиями, космосом, фотографией и гитарой.</p>
-            <p class="bio-text" id="bio-5">Можно найти меня на <a class="link-u" href="https://www.linkedin.com/in/valprotsenko/" target="_blank" rel="noopener">LinkedIn</a>, посмотреть на <a class="link-u" href="https://www.youtube.com/@valera_ui" target="_blank" rel="noopener">YouTube</a>, написать в <a class="link-u" href="https://t.me/valeriy_ui" target="_blank" rel="noopener">Telegram</a> и <a class="link-u" href="mailto:valgholz@gmail.com">Email</a>.</p>
-          </div>
-        </section>
-        <section class="cases-section">
-          <div class="cases-head" id="cases-label">Кейсы</div>
-          <div class="cases-list">
-            <div class="case-row" onclick="showCase('pony-express')"><span class="case-type">Web</span><div class="case-info"><div class="case-name-wrap"><span class="case-name">Pony Express</span></div><span class="case-cat" data-ru="Логистика" data-en="Logistics">Логистика</span></div></div>
-            <div class="case-row" onclick="showCase('finity')"><span class="case-type">Web/Mobile</span><div class="case-info"><div class="case-name-wrap"><span class="case-name">Finity</span></div><span class="case-cat" data-ru="Криптобиржа" data-en="Crypto Exchange">Криптобиржа</span></div></div>
-            <div class="case-row" onclick="showCase('bank')"><span class="case-type">Mobile</span><div class="case-info"><div class="case-name-wrap"><span class="case-name">***</span><span class="badge"><span class="badge-text">NDA</span></span></div><span class="case-cat" data-ru="Мобильный банк" data-en="Mobile Bank">Мобильный банк</span></div></div>
-            <div class="case-row" onclick="showCase('kamzumi')"><span class="case-type">Mobile</span><div class="case-info"><div class="case-name-wrap"><span class="case-name">KamZuMi</span></div><span class="case-cat" data-ru="Доставка еды" data-en="Food Delivery">Доставка еды</span></div></div>
-            <div class="case-row" onclick="showCase('esports')"><span class="case-type">Mobile</span><div class="case-info"><div class="case-name-wrap"><span class="case-name">***</span><span class="badge"><span class="badge-text">NDA</span></span></div><span class="case-cat" data-ru="Киберспорт" data-en="Esports">Киберспорт</span></div></div>
-            <div class="case-row" onclick="showCase('easy-travel')"><span class="case-type">Mobile</span><div class="case-info"><div class="case-name-wrap"><span class="case-name">Easy Travel</span></div><span class="case-cat" data-ru="Агрегатор" data-en="Aggregator">Агрегатор</span></div></div>
-          </div>
-        </section>
-      </div>
-    </div>
-    <footer class="site-footer"><div class="footer-inner"><span class="footer-text">Valeriy P. © 2026, v 1.0</span></div></footer>
+<main class="view home active" id="home">
+  <div class="wrap">
+    <p class="intro">With 7 years of experience in UX/UI and Product Design, I moved into iOS development to close the gap between design and engineering. Now I work as a Design Engineer:<br>I think in systems, prototype in code, and ship interfaces that feel as good as they look.</p>
+    <div class="grid" id="grid"></div>
   </div>
-</div>
-
-<!-- ══ ABOUT ══ -->
-<div class="page" id="page-about">
-  <div class="layout">
-    <div class="col">
-      <div class="col-inner">
-        <div class="bio-head">
-          <p class="t-medium" data-ru="Обо мне" data-en="About Me">Обо мне</p>
-          <p class="bio-text t-second" data-ru="Мой путь, с чего начинал, где работал и какие были проекты" data-en="My path — where I started, worked, and what I built">Мой путь, с чего начинал, где работал и какие были проекты</p>
-        </div>
-        <div class="timeline">
-          <div><p class="tl-year" data-ru="2009. Щупаю Adobe Photoshop" data-en="2009. Discovering Adobe Photoshop">2009. Щупаю Adobe Photoshop</p><p class="tl-desc" data-ru="Баннеры, оформление YouTube каналов, обложки для видео." data-en="Banners, YouTube channel art, video thumbnails.">Баннеры, оформление YouTube каналов, обложки для видео.</p></div>
-          <div><p class="tl-year" data-ru="2019. Щупаю Adobe Illustrator" data-en="2019. Discovering Adobe Illustrator">2019. Щупаю Adobe Illustrator</p><p class="tl-desc" data-ru="Первый коммерческий опыт. Фриланс. Логотипы, баннеры, креативы." data-en="First commercial work. Freelance. Logos, banners, creatives.">Первый коммерческий опыт. Фриланс. Логотипы, баннеры, креативы.</p></div>
-          <div><p class="tl-year">2021. UX/UI Designer @ DSGNclub</p><p class="tl-desc" data-ru="Дизайн-студия. Figma + Adobe CC. Промо, лендинги, мобильные утилиты." data-en="Design studio. Figma + Adobe CC. Promo, landing pages, mobile utilities.">Дизайн-студия. Figma + Adobe CC. Промо, лендинги, мобильные утилиты.</p></div>
-          <div><p class="tl-year">2022. Product Designer @ Jetmix</p><p class="tl-desc" data-ru="Аутсорс. Web и mobile. Крупные проекты: History.RF, Pony Express, Лекторий «Достоевский»." data-en="Outsource. Web and mobile. Key projects: History.RF, Pony Express, Dostoevsky Lecture Hall.">Аутсорс. Web и mobile. Крупные проекты: History.RF, Pony Express, Лекторий «Достоевский».</p></div>
-          <div><p class="tl-year">2023. Senior Product Designer @ 4people</p><p class="tl-desc" data-ru="Продукт. Топ-3 eSports/iGaming. Процессы, аналитика, международный опыт." data-en="Product. Top-3 eSports/iGaming. Processes, analytics, international experience.">Продукт. Топ-3 eSports/iGaming. Процессы, аналитика, международный опыт.</p></div>
-          <div><p class="tl-year">2025. Senior Product Designer @ Finity</p><p class="tl-desc" data-ru="Иностранный web3-стартап. Скорость, ответственность, фичи." data-en="Foreign web3 startup. Speed, ownership, features.">Иностранный web3-стартап. Скорость, ответственность, фичи.</p></div>
-          <div><p class="tl-year" data-ru="Сейчас. Lead Product Designer @ Bibip" data-en="Now. Lead Product Designer @ Bibip">Сейчас. Lead Product Designer @ Bibip</p><p class="tl-desc" data-ru="Стартап. B2B, E-Commerce. Стратегия, принятие решений, менеджмент." data-en="Startup. B2B, E-Commerce. Strategy, decision-making, management.">Стартап. B2B, E-Commerce. Стратегия, принятие решений, менеджмент.</p></div>
-          <div><p class="tl-year" data-ru="Интересы" data-en="Interests">Интересы</p><p class="tl-desc" data-ru="Гитара, фотография, блог, технологии, космос, дизайн и код." data-en="Guitar, photography, blog, technology, space, design and code.">Гитара, фотография, блог, технологии, космос, дизайн и код.</p></div>
-        </div>
-        <div style="padding:0 8px">
-          <img class="about-photo" src="assets/aboutphoto.webp" alt="Валерий Проценко">
-          <p class="about-photo-cap" data-ru="ИИ или реальная пикча?" data-en="AI or a real photo?">ИИ или реальная пикча?</p>
-        </div>
-      </div>
-    </div>
-    <footer class="site-footer"><div class="footer-inner"><span class="footer-text">Valeriy P. © 2026, v 1.0</span></div></footer>
-  </div>
-</div>
-
-<!-- ══ CV ══ -->
-<div class="page" id="page-cv">
-  <div class="layout">
-    <div class="col">
-      <div class="col-inner">
-        <div class="bio-head">
-          <p class="t-medium" data-ru="Резюме" data-en="Resume">Резюме</p>
-          <p class="bio-text t-second" data-ru="2 языковые версии в Google Docs" data-en="2 language versions in Google Docs">2 языковые версии в Google Docs</p>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:20px;padding:0 8px">
-          <p class="bio-text"><a class="link-u" href="https://docs.google.com/document/d/1jUiJ3xgQ7YLItNGBhoLgZ8bpKq3Htabm/edit?usp=sharing&ouid=103879253844549468686&rtpof=true&sd=true" target="_blank" rel="noopener" data-ru="Резюме на английском" data-en="Resume in English">Резюме на английском</a> <span data-ru="или" data-en="or">или</span> <a class="link-u" href="https://docs.google.com/document/d/1wekz5StkLEM-_UEOp0KCeE262ovKE-n9gheQllkRIZ8/edit?tab=t.0" target="_blank" rel="noopener" data-ru="резюме на русском языке" data-en="resume in Russian">резюме на русском языке</a>.</p>
-          <p class="bio-text"><span data-ru="Можно найти меня на" data-en="Find me on">Можно найти меня на</span> <a class="link-u" href="https://www.linkedin.com/in/valprotsenko/" target="_blank" rel="noopener">LinkedIn</a>, <span data-ru="посмотреть на" data-en="watch on">посмотреть на</span> <a class="link-u" href="https://www.youtube.com/@valera_ui" target="_blank" rel="noopener">YouTube</a>, <span data-ru="написать в" data-en="message on">написать в</span> <a class="link-u" href="https://t.me/valeriy_ui" target="_blank" rel="noopener">Telegram</a> <span data-ru="и" data-en="and">и</span> <a class="link-u" href="mailto:valgholz@gmail.com">Email</a>.</p>
-        </div>
-      </div>
-    </div>
-    <footer class="site-footer"><div class="footer-inner"><span class="footer-text">Valeriy P. © 2026, v 1.0</span></div></footer>
-  </div>
-</div>
-
-<!-- ══ CONCEPTS ══ -->
-<div class="page" id="page-concepts">
-  <div class="layout">
-    <div class="col">
-      <div class="col-inner" style="gap:0">
-        <div class="bio-head" style="margin-bottom:64px">
-          <p class="t-medium" data-ru="Подборка концептов" data-en="Concept Collection">Подборка концептов</p>
-          <p class="bio-text t-second" data-ru="Пет-проекты и шоты" data-en="Pet projects and shots">Пет-проекты и шоты</p>
-        </div>
-        <div class="concept-block"><div class="concept-head"><p class="concept-title">Cyberpunk 2077</p><p class="concept-desc" data-ru="Концепт Game UI на примере сайта ААА-Game, 2021." data-en="Game UI concept based on an AAA-Game website, 2021.">Концепт Game UI на примере сайта ААА-Game, 2021.</p></div><div class="concept-imgs"><img class="img-ph" style="width:616px;height:auto" src="assets/cyber1.webp" alt=""><img class="img-ph" style="width:616px;height:auto" src="assets/cyber2.webp" alt=""><img class="img-ph" style="width:616px;height:auto" src="assets/cyber3.webp" alt=""></div></div>
-        <div class="concept-block"><div class="concept-head"><p class="concept-title">Eminem</p><p class="concept-desc" data-ru="Концепт 2023 года. Просто для души, получил награду за UI от DProfile." data-en="2023 concept. Just for fun — won a UI award from DProfile.">Концепт 2023 года. Просто для души, получил награду за UI от DProfile.</p></div><div class="concept-imgs"><img class="img-ph" style="width:616px;height:auto" src="assets/eminem1.webp" alt=""><img class="img-ph" style="width:616px;height:auto" src="assets/eminem2.webp" alt=""><img class="img-ph" style="width:616px;height:auto" src="assets/eminem3.webp" alt=""></div></div>
-        <div class="concept-block"><div class="concept-head"><p class="concept-title">Mercedes-Benz</p><p class="concept-desc" data-ru="Решил попробовать свои силы в дизайне корпоративного сайта Mercedes-Benz, 2022." data-en="Tried my hand at redesigning the Mercedes-Benz corporate website, 2022.">Решил попробовать свои силы в дизайне корпоративного сайта Mercedes-Benz, 2022.</p></div><div class="concept-imgs"><div class="merz-row" style="display:flex;gap:8px"><img style="flex:1;width:0;height:auto;border-radius:22px;object-fit:cover" src="assets/merz1.webp" alt=""><img style="flex:1;width:0;height:auto;border-radius:22px;object-fit:cover" src="assets/merz2.webp" alt=""><img style="flex:1;width:0;height:auto;border-radius:22px;object-fit:cover" src="assets/merz3.webp" alt=""></div><img class="img-ph" style="width:616px;height:auto" src="assets/merz4.webp" alt=""><img class="img-ph" style="width:616px;height:auto" src="assets/merz5.webp" alt=""></div></div>
-        <div class="concept-block"><div class="concept-head"><p class="concept-title">FILM</p><p class="concept-desc" data-ru="Один из первых web-дизайнов в Figma, 2019." data-en="One of my first web designs in Figma, 2019.">Один из первых web-дизайнов в Figma, 2019.</p></div><div class="concept-imgs"><img class="img-ph" style="width:616px;height:auto" src="assets/film.webp" alt=""></div></div>
-        <div class="concept-block"><div class="concept-head"><p class="concept-title" data-ru="Шоты" data-en="Shots">Шоты</p><p class="concept-desc">2020–2022</p></div><div class="concept-imgs"><div class="shots-row" style="display:flex;gap:8px;margin-bottom:8px"><img style="flex:1;width:0;height:auto;border-radius:22px;object-fit:cover" src="assets/shot1.webp" alt=""><img style="flex:1;width:0;height:auto;border-radius:22px;object-fit:cover" src="assets/shot2.webp" alt=""><img style="flex:1;width:0;height:auto;border-radius:22px;object-fit:cover" src="assets/shot3.webp" alt=""></div><div class="shots-row" style="display:flex;gap:8px"><img style="flex:1;width:0;height:auto;border-radius:22px;object-fit:cover" src="assets/shot4.webp" alt=""><img style="flex:1;width:0;height:auto;border-radius:22px;object-fit:cover" src="assets/shot5.webp" alt=""><img style="flex:1;width:0;height:auto;border-radius:22px;object-fit:cover" src="assets/shot6.webp" alt=""></div></div></div>
-      </div>
-    </div>
-    <footer class="site-footer"><div class="footer-inner"><span class="footer-text">Valeriy P. © 2026, v 1.0</span></div></footer>
-  </div>
-</div>
+  <footer class="footer">Valeriy P. © 2026, v 2.0</footer>
+</main>
 
 <!-- ══ CASE ══ -->
-<div class="page" id="page-case">
-  <div class="case-layout">
-    <div class="case-col">
-      <div class="case-inner" id="caseContent"></div>
-    </div>
-    <footer class="site-footer"><div class="footer-inner"><span class="footer-text">Valeriy P. © 2026, v 1.0</span></div></footer>
-  </div>
-</div>
+<main class="view case" id="case">
+  <div class="wrap" id="caseContent"></div>
+</main>
 
-<aside class="case-sidebar" id="caseSidebar" style="display:none"></aside>
-<div class="lightbox" id="lightbox" onclick="closeLightbox()"><img id="lightboxImg" src="" alt=""></div>
+<!-- ══ LIGHTBOX ══ -->
+<div class="lb" id="lb" role="dialog" aria-label="Image preview"><img id="lbImg" src="" alt=""></div>
 
 <script>
-const CASES={
-  'pony-express':{title:'Pony Express',type:{ru:'Логистика',en:'Logistics'},intro:{ru:['Задача: обновить UI, улучшить UX и usability личного кабинета, а также поработать над автоматизацией сервиса.','Что за проект — сервис предоставляет возможность приобретать товары из-за рубежа с доставкой в Россию.','Что сделал — редизайн личного кабинета, уменьшил количество обращений в саппорт на 35%. Спроектировал фичу группировки заказов в посылки.'],en:['Task: update the UI, improve UX and usability of the personal account, and work on service automation.','About the project — a service that lets users purchase goods from abroad with delivery to Russia.','What I did — redesigned the personal account, reduced support requests by 35%. Designed the order grouping into packages feature.']},sections:[{id:'s1',title:{ru:'Дашборд',en:'Dashboard'},desc:{ru:'Вывел основную информацию для юзера, ориентироваться стало проще, не нужно "прыгать" по разделам.',en:'Surfaced key info — easier orientation, no more jumping between sections.'},cap:{ru:'Как пришёл к этому? Через множество вариантов и А/B-тесты.',en:'How I got here? Many iterations and A/B tests.'},t:'full',img:'assets/pony1.webp'},{id:'s2',title:{ru:'Заказы',en:'Orders'},desc:{ru:'Гибкая табличка. В пару кликов объединять покупки в одну посылку, делить по разным адресам и отслеживать трек-номера в реальном времени.',en:'A flexible table. Group purchases into one package, split across addresses, track statuses in real time.'},cap:{ru:'Статус заказа влияет на функционал: оплачен — упакуй, в пути — посмотри где.',en:'Order status drives functionality: paid — pack it, in transit — track it.'},t:'full',img:'assets/pony2.webp'},{id:'s3',title:{ru:'Карточки',en:'Cards'},desc:{ru:'Карточки. Функционал как у таблицы, но другой вид и опыт.',en:'Cards. Same functionality as the table, different view.'},cap:{ru:'Множество вариантов, usability-тестов на 20+ юзерах.',en:'Many iterations and usability tests with 20+ users.'},t:'full',img:'assets/pony3.webp'},{id:'s4',title:{ru:'Посылка',en:'Package'},desc:{ru:'Отследить и проверить статус, упаковать покупку, выбрать получателя и адрес, заполнить декларацию.',en:'Track status, pack a purchase into a parcel, choose recipient and address, fill in customs declaration.'},cap:{ru:'Много ресёрча и конкурентного анализа.',en:'Extensive research and competitive analysis.'},t:'full',img:'assets/pony4.webp'},{id:'s5',title:{ru:'Оформление, чат, калькулятор и профиль',en:'Order form, chat, calculator & profile'},desc:{ru:'Дополнительные экраны для повышения автоматизации и usability сервиса.',en:'Additional screens to improve service automation and usability.'},t:'multi',imgs:['assets/pony5.webp','assets/pony6.webp','assets/pony7.webp','assets/pony8.webp'],caps:{ru:['Заполнил всю инфу, добавил нужные товары, отправил на выкуп.','Остались вопросы — саппорт имеется.','Быстро подсчитать стоимость доставки.','Можно выбрать получателя и отсылать посылки на разные адреса.'],en:['Filled in all the info, added items, sent for buyback.','Still have questions — support is available.','Quickly calculate the delivery cost.','Choose a recipient and send parcels to different addresses.']}},{id:'s6',title:{ru:'Итог',en:'Result'},desc:{ru:'Весь редизайн позволил сократить обращения в поддержку на 35%. Получили массу положительных отзывов после переработки логики и навигации. Фича группировки заказов в посылки позволила привлечь предпринимателей.',en:'The full redesign reduced support requests by 35%. We received a lot of positive feedback after reworking the logic and navigation. The order grouping feature attracted business users.'},t:'text'}],prev:null,next:{id:'finity',ru:'Finity',en:'Finity'}},
-  'finity':{title:'Finity',type:{ru:'Криптобиржа',en:'Crypto Exchange'},intro:{ru:['Задача: погрузиться в нишу криптовалют. Спроектировать интерфейс по стандартам CEX.','Что за проект — централизованная платформа для торговли, обмена и хранения криптовалют для Web и Mobile.','Что сделал — разобрался в криптовалюте и спроектировал P2P, Spot, Copy Trading.'],en:['Task: dive into crypto. Design a modern interface following CEX standards.','About the project — a centralised platform for trading, exchanging, and storing cryptocurrencies on Web and Mobile.','What I did — learned crypto and designed P2P, Spot, and Copy Trading flows.']},sections:[{id:'s1',title:{ru:'Главный экран',en:'Home Screen'},desc:{ru:'Баланс с адаптивным графиком, новости в видео stories и базовые фичи для трейдинга.',en:'Balance with an adaptive chart, app news in video stories, and basic trading features.'},cap:{ru:'Тёмная и светлая версии.',en:'Dark and light themes.'},t:'pair',imgs:['assets/finity1.webp','assets/finity3.webp']},{id:'s2',title:{ru:'Кошелёк',en:'Wallet'},desc:{ru:'Стандартный крипто-кошелёк для пополнения, депозита и вывода валют.',en:'A standard crypto wallet for deposits, top-ups, and withdrawals.'},cap:{ru:'Список токенов из которых формируется баланс.',en:'List of tokens that make up the balance.'},t:'pair',imgs:['assets/finity5.webp','assets/finity6.webp']},{id:'s3',title:{ru:'Авторизация',en:'Auth'},desc:{ru:'Войти или зарегистрироваться по email или телефону. Выбор кода страны.',en:'Sign in or register by email or phone. Country code selection.'},cap:{ru:'Начальное состояние авторизации и выбор кода страны.',en:'Auth screen and country code selection.'},t:'pair',imgs:['assets/finity7.webp','assets/finity8.webp']},{id:'s4',title:{ru:'Верификация',en:'Verification'},desc:{ru:'Пройти верификацию несколькими способами: паспорт, ID-карта, водительские права.',en:'Verify identity through passport, ID card, or driver\u2019s licence.'},cap:{ru:'Шаг верификации и экран успеха.',en:'Verification step and success screen.'},t:'pair',imgs:['assets/finity9.webp','assets/finity10.webp']},{id:'s5',title:{ru:'Дашборд',en:'Dashboard'},desc:{ru:'График динамики портфеля с фильтрами по времени. Действия: пополнение, вывод, обмен.',en:'Portfolio chart with time filters. Actions: deposit, withdraw, swap.'},cap:{ru:'Аналитика в кооперативе с PM и разработкой.',en:'Built in collaboration with PM and dev team.'},t:'full',img:'assets/finity11.webp'},{id:'s6',title:{ru:'Spot',en:'Spot'},desc:{ru:'Интерактивный торговый терминал с обновлением данных и гибкими таймфреймами.',en:'Interactive trading terminal with live data and flexible timeframes.'},cap:{ru:'Сложная аналитика в чистом интерфейсе.',en:'Complex analytics in a clean interface.'},t:'full',img:'assets/finity12.webp'},{id:'s7',title:{ru:'Copy Trading',en:'Copy Trading'},desc:{ru:'Детальная статистика трейдеров, ROI и коэффициенты. Новички копируют стратегии опытных.',en:'Detailed trader stats, ROI, and ratios. Beginners can copy experienced traders.'},cap:{ru:'Выбор стратегии без перехода в карточку трейдера.',en:'Choosing a strategy without opening the trader profile.'},t:'full',img:'assets/finity13.webp'},{id:'s8',title:{ru:'P2P',en:'P2P'},desc:{ru:'Покупка и продажа криптовалюты напрямую между пользователями, с гарантией безопасности.',en:'Buy and sell crypto directly between users, with security guarantees.'},cap:{ru:'Контроль над сделкой в чате с модерацией и таймером.',en:'Deal management in chat with moderation and a timer.'},t:'pair-web',imgs:['assets/finity14.webp','assets/finity15.webp']},{id:'s9',title:{ru:'Аналитика',en:'Analytics'},desc:{ru:'4 ключевых метрики: цена, агрессор, дисбаланс книги, волатильность.',en:'4 key analytics charts: price, aggressor, order book imbalance, volatility.'},cap:{ru:'Интерактивные графики с настраиваемыми индикаторами.',en:'Interactive charts with configurable indicators.'},t:'full',img:'assets/finity16.webp'},{id:'s10',title:{ru:'Калькулятор',en:'Calculator'},desc:{ru:'Интерактивный калькулятор доходности для моделирования инвестиций.',en:'Interactive earnings calculator for modelling investment scenarios.'},cap:{ru:'Гибкая система расчётов и интеграция с аналитикой.',en:'Flexible calculation system with analytics integration.'},t:'full',img:'assets/finity17.webp'},{id:'s11',title:{ru:'Итог',en:'Result'},desc:{ru:'Вместе с экспертами и разработчиками я спроектировал доступный интерфейс, благодаря чему снизил время выполнения задач (TCT) на 70% — пользователи доходят до первой сделки всего за 3-4 минуты. За счет интерактивных графиков, простой навигации, пользователи чувствуют себя более уверенно, о чем свидетельствует их обратная связь.',en:'Together with experts and developers I designed an accessible interface, reducing task completion time (TCT) by 70% — users reach their first trade in just 3-4 minutes. Interactive charts and simple navigation make users feel more confident, as reflected in their feedback.'},t:'text'}],prev:{id:'pony-express',ru:'Pony Express',en:'Pony Express'},next:{id:'bank',ru:'***',en:'***'}},
-  'bank':{title:'***',type:{ru:'Мобильный банк',en:'Mobile Bank'},nda:true,intro:{ru:['Задача: спроектировать экран истории операций для банковского приложения.','Что за проект — мобильный банк, ТОП-15 в РФ, B2C.','Что сделал — спроектировал фильтр и сортировку на основе usability-тестов и конкурентного анализа.'],en:['Task: design the transaction history screen for a banking app.','About the project — a mobile bank, Top-15 in Russia, B2C.','What I did — designed filters and sorting based on usability tests and competitive analysis.']},sections:[{id:'s1',title:{ru:'История операций',en:'Transaction History'},desc:{ru:'Вертикальный список по секциям с датой, поиском и фильтрами.',en:'A vertical list divided into date sections with search and filters.'},cap:{ru:'Главный экран "Истории операций". Раздел вынесен в TabBar.',en:'"Transaction History" main screen. Section placed in TabBar.'},t:'single',img:'assets/bank1.webp'},{id:'s2',title:{ru:'Фильтры',en:'Filters'},desc:{ru:'Общий фильтр по нажатию на иконку. Содержит гибкие параметры для точного результата.',en:'The main filter opens via an icon button. Contains flexible parameters for precise results.'},cap:{ru:'Фильтр по кошельку, счету, периоду и статусу.',en:'Filter by wallet, account, period, and status.'},t:'pair',imgs:['assets/bank2.webp','assets/bank3.webp']},{id:'s3',title:{ru:'Поиск',en:'Search'},desc:{ru:'Поиск по истории. Умные подсказки на основе истории запросов.',en:'Search through transaction history with smart suggestions.'},cap:{ru:'Пустое состояние и результат поиска.',en:'Empty state and search results.'},t:'pair',imgs:['assets/bank5.webp','assets/bank6.webp']},{id:'s4',title:{ru:'Результат фильтрации',en:'Filter Result'},desc:{ru:'Применённые фильтры как теги, пустое состояние и результат.',en:'Applied filters as tags, empty state and filtered results.'},cap:{ru:'Нет операций и отфильтрованный список.',en:'No results and filtered list.'},t:'pair',imgs:['assets/bank7.webp','assets/bank8.webp']},{id:'s5',title:{ru:'Карточка операции',en:'Transaction Detail'},desc:{ru:'"Внутрянка" операции: статус, цена, тип, номер, дата.',en:'Transaction detail: status, amount, type, number, date.'},cap:{ru:'Ориентировался на популярные UX-паттерны.',en:'Based on popular UX patterns.'},t:'single',img:'assets/bank9.webp'},{id:'s6',title:{ru:'Аналитика расходов',en:'Spending Analytics'},desc:{ru:'Инфографика расходов и доходов по месяцам с фильтрацией.',en:'Expenses and revenues chart by month with filtering.'},cap:{ru:'Кликабельные графики для быстрого перехода.',en:'Clickable charts for quick navigation.'},t:'single',img:'assets/bank10.webp'},{id:'s7',title:{ru:'Конкурентный анализ',en:'Competitive Analysis'},desc:{ru:'Провёл анализ 5 банковских приложений: Сбер, Тинькофф, Альфа, Озон, Почта.',en:'Analysed 5 banking apps: Sber, Tinkoff, Alfa, Ozon, Pochta.'},cap:{ru:'Конкурентный анализ стал базовым фреймворком.',en:'Competitive analysis became the core research framework.'},t:'full',img:'assets/bank11.webp'},{id:'s8',title:{ru:'Usability-тестирование',en:'Usability Testing'},desc:{ru:'Провёл небольшое usability-тестирование на примере Тинькофф, Сбер и Альфа.',en:'Ran usability tests on Tinkoff, Sber, and Alfa banking apps.'},cap:{ru:'Вывод: Альфа выполнил все условия сценария.',en:'Conclusion: Alfa completed all scenario conditions.'},t:'full',img:'assets/bank12.webp'},{id:'s9',title:{ru:'UX Research',en:'UX Research'},desc:{ru:'Jobs-to-be-done и гипотезы на основе исследования.',en:'Jobs-to-be-done and hypotheses based on research.'},cap:{ru:'Фичи, ИА, JTBD и юзабилити.',en:'Features, IA, JTBD, and usability.'},t:'full',img:'assets/bank13.webp'},{id:'s10',title:{ru:'Итог',en:'Result'},desc:{ru:'Конкурентный анализ стал базовым фреймворком для ресёрча. Usability-тесты дали фундамент для проектирования интерфейса.',en:'Competitive analysis became the core research framework. Usability tests provided the foundation for interface design.'},t:'text'}],prev:{id:'finity',ru:'Finity',en:'Finity'},next:{id:'kamzumi',ru:'KamZuMi',en:'KamZuMi'}},
-  'kamzumi':{title:'KamZuMi',type:{ru:'Доставка еды',en:'Food Delivery'},intro:{ru:['Задача: создать приложение для доставки и самовывоза еды.','Что за проект — кроссплатформенное приложение для сети доставок еды.','Что сделал — простое оформление заказов. Интерфейс на основе лучших практик e-commerce.'],en:['Task: create an app for food delivery and pick-up.','About the project — a cross-platform app for a food delivery network.','What I did — simple order flow. Interface based on e-commerce best practices.']},sections:[{id:'s1',title:{ru:'Меню',en:'Menu'},desc:{ru:'Можно сразу выбрать блюдо и продолжить изучение ассортимента.',en:'Users can pick a dish right away and keep browsing.'},cap:{ru:'Вертикальный список. Sticky Scroll категорий блюд.',en:'Vertical list. Sticky scroll of dish categories.'},t:'pair',imgs:['assets/kzm1.webp','assets/kzm2.webp']},{id:'s2',title:{ru:'Все блюда',en:'All Dishes'},desc:{ru:'Полный каталог по категориям: суши, роллы, хосамаки, супы, салаты, поке, сеты, напитки.',en:'Full catalogue by category: sushi, rolls, hosamaki, soups, salads, poke, sets, drinks.'},cap:{ru:'Категории блюд крупным планом.',en:'Dish categories overview.'},t:'single',img:'assets/kzm3.webp'},{id:'s3',title:{ru:'Карточка товара',en:'Product Card'},desc:{ru:'Переделал карточку товара на основе опроса пользователей. A/B-тестирование.',en:'Redesigned the product card based on user survey data. A/B testing.'},cap:{ru:'Структурированная информация и простая подача.',en:'Structured information and clear presentation.'},t:'single',img:'assets/kzm4.webp'},{id:'s4',title:{ru:'Корзина',en:'Cart'},desc:{ru:'Ключевой экран в e-commerce — напрямую влияет на конверсию.',en:'A key e-commerce screen — directly impacts purchase conversion.'},cap:{ru:'Интерактивный прототип, коридорное тестирование.',en:'Interactive prototype and guerrilla testing.'},t:'pair',imgs:['assets/kzm5.webp','assets/kzm6.webp']},{id:'s5',title:{ru:'Оформление заказа',en:'Checkout'},desc:{ru:'Выбор доставки или самовывоза, адрес, дата, время, метод оплаты.',en:'Delivery or pickup, address, date, time, payment method.'},cap:{ru:'Полный флоу оформления заказа.',en:'Full order checkout flow.'},t:'pair',imgs:['assets/kzm7.webp','assets/kzm8.webp']},{id:'s6',title:{ru:'Статус заказа',en:'Order Status'},desc:{ru:'Трекинг статуса заказа в реальном времени и история заказов.',en:'Real-time order status tracking and order history.'},cap:{ru:'Статус "Готовится" и список всех заказов.',en:'In preparation status and all orders list.'},t:'pair',imgs:['assets/kzm9.webp','assets/kzm10.webp']},{id:'s7',title:{ru:'Итог',en:'Result'},desc:{ru:'За 3 месяца после запуска нового дизайна конверсия в заказ выросла на 25%, количество брошенных корзин снизилось почти на треть. Мы упростили выбор блюд и оформление заказа, благодаря чему пользователи теперь покупают быстрее, чаще возвращаются, а средний чек сети увеличился на 15%.',en:'In 3 months after the new design launch, order conversion grew by 25% and cart abandonment dropped by nearly a third. We simplified dish selection and checkout, so users buy faster, return more often, and the average order value increased by 15%.'},t:'text'}],prev:{id:'bank',ru:'***',en:'***'},next:{id:'esports',ru:'Киберспорт',en:'Esports'}},
-  'esports':{title:'***',type:{ru:'Киберспорт',en:'Esports'},nda:true,intro:{ru:['Задача: проектировать высоконагруженый интерфейс на основе аналитики, поддержка и развитие дизайн-системы.','Что за проект — Топ 3 международная iGaming / Esports платформа (10M+ MAU, продукт доступен в 150+ странах).','Что сделал — спроектировал 5 интерфейсов статистики и аналитики для дисциплин: Dota 2, CS 2, LOL, Valorant, FIFA. Разработал дизайн, графику, анимации для более чем 20 мини-игр (Three in a row, Card games, Racing, Dice).'],en:['Task: design high-load interfaces based on analytics, support and develop the design system.','About the project — Top 3 international iGaming / Esports platform (10M+ MAU, available in 150+ countries).','What I did — designed 5 statistics and analytics interfaces for Dota 2, CS 2, LOL, Valorant, FIFA. Developed design, graphics and animations for 20+ mini-games (Three in a row, Card games, Racing, Dice).']},sections:[{id:'s1',title:{ru:'Партнёры',en:'Partners'},desc:{ru:'***',en:'***'},cap:{ru:'',en:''},t:'pair',imgs:['assets/esport1.webp','assets/esport2.webp']},{id:'s2',title:{ru:'Dota 2 — The International',en:'Dota 2 — The International'},desc:{ru:'***',en:'***'},cap:{ru:'',en:''},t:'pair',imgs:['assets/esport4.webp','assets/esport5.webp']},{id:'s3',title:{ru:'FIFA — FC Pro World Championship',en:'FIFA — FC Pro World Championship'},desc:{ru:'***',en:'***'},cap:{ru:'',en:''},t:'pair',imgs:['assets/esport7.webp','assets/esport8.webp']},{id:'s4',title:{ru:'Мини-игра Golden Push',en:'Mini-game: Golden Push'},desc:{ru:'***',en:'***'},cap:{ru:'',en:''},t:'single',img:'assets/esport6.webp'},{id:'s5',title:{ru:'Итог',en:'Result'},desc:{ru:'За время работы я успел спроектировать 5 интерфейсов статистики и аналитики для дисциплин: Dota 2, CS 2, LOL, Valorant, FIFA. Сделал редизайн приложения под сезонные мероприятия (The International, Major). Спроектировал более 20 мини-игр, а также помогал рефакторить дизайн-систему, сделав макеты лёгкими и удобными для всей команды.',en:'During my time I designed 5 statistics and analytics interfaces for Dota 2, CS 2, LOL, Valorant, FIFA. Redesigned the app for seasonal events (The International, Major). Designed 20+ mini-games and helped refactor the design system, making layouts lightweight and convenient for the whole team.'},t:'text'}],prev:{id:'kamzumi',ru:'KamZuMi',en:'KamZuMi'},next:{id:'easy-travel',ru:'Easy Travel',en:'Easy Travel'}},
-  'easy-travel':{title:'Easy Travel',type:{ru:'Агрегатор',en:'Aggregator'},intro:{ru:['Задача: дизайн приложения поиска и бронирования отелей и туров онлайн.','Что за проект — онлайн агрегатор для туризма.','Что сделал — MVP для нативного iOS приложения за 2 месяца.'],en:['Task: design an app for searching and booking hotels and tours online.','About the project — an online tourism aggregator.','What I did — designed the MVP for a native iOS app in 2 months.']},sections:[{id:'s1',title:{ru:'Онбординг',en:'Onboarding'},desc:{ru:'Вводный экран для нового пользователя.',en:'Introductory screen for new users.'},cap:{ru:'Приветственный экран приложения.',en:'App welcome screen.'},t:'single',img:'assets/easytravel1.webp'},{id:'s2',title:{ru:'Поиск и фильтр',en:'Search & Filter'},desc:{ru:'Поиск тура по ключевым параметрам, точным фильтрам с сортировкой.',en:'Find a tour by key parameters, precise filters, and sort results.'},cap:{ru:'Быстрый выбор и поиск с простым фильтром.',en:'Quick selection and search with a simple filter.'},t:'pair',imgs:['assets/easytravel2.webp','assets/easytravel3.webp']},{id:'s3',title:{ru:'Результаты',en:'Results'},desc:{ru:'Выбор туров с ключевой информацией. В каждой карточке: фото, расстояние до пляжа и аэропорта.',en:'Tour selection with key info. Each card: photos, distance to beach and airport.'},cap:{ru:'Список предложений с детальной карточкой отеля.',en:'List of offers and detailed hotel card.'},t:'pair',imgs:['assets/easytravel4.webp','assets/easytravel5.webp']},{id:'s4',title:{ru:'Туры отеля',en:'Hotel Tours'},desc:{ru:'Список туров по датам с ценами разных туроператоров.',en:'Tour list by date with prices from different tour operators.'},cap:{ru:'Отзывы и список туров.',en:'Reviews and tour list.'},t:'pair',imgs:['assets/easytravel6.webp','assets/easytravel7.webp']},{id:'s5',title:{ru:'Детали поездки',en:'Trip Details'},desc:{ru:'Критическая точка конверсии. Стилизовал под классический авиабилет для усиления доверия.',en:'A critical conversion point. Styled like a classic flight ticket to build trust.'},cap:{ru:'Пользователи быстрее принимают решение в привычном формате.',en:'Users decide faster in a familiar format.'},t:'single',img:'assets/easytravel8.webp'},{id:'s6',title:{ru:'Бронирование',en:'Booking'},desc:{ru:'4-шаговая последовательность — данные клиента, туристы, итог, оплата.',en:'4-step flow — customer data, tourists, summary, payment.'},cap:{ru:'Ввод данных и информация о туристах.',en:'Customer data and tourist information.'},t:'pair',imgs:['assets/easytravel9.webp','assets/easytravel10.webp']},{id:'s7',title:{ru:'Оплата',en:'Payment'},desc:{ru:'Выбор карты и добавление новой. Итог тура перед оплатой.',en:'Select card or add new one. Tour summary before payment.'},cap:{ru:'Список карт и добавление новой карты.',en:'Card list and add new card screen.'},t:'pair',imgs:['assets/easytravel11.webp','assets/easytravel12.webp']},{id:'s8',title:{ru:'Подтверждение',en:'Confirmation'},desc:{ru:'Тур забронирован. Билет с QR-кодом и деталями.',en:'Tour is booked. Ticket with QR code and details.'},cap:{ru:'Подтверждение бронирования с QR-кодом.',en:'Booking confirmation with QR code.'},t:'single',img:'assets/easytravel14.webp'},{id:'s9',title:{ru:'Итог',en:'Result'},desc:{ru:'У меня получился готовый к разработке макет MVP-версии приложения. Я не придумывал велосипед, а взял официальный UIKit iOS 17, интерфейс выглядит привычно для пользователей Apple, а разработчики смогут собрать его гораздо быстрее и дешевле. Благодаря анализу конкурентов и CJM, получилось создать логичное приложение, продукт полностью готов к запуску и первому тестированию на реальных людях.',en:'I ended up with a dev-ready MVP layout. I did not reinvent the wheel — I used the official iOS 17 UIKit, so the interface feels familiar to Apple users and developers can build it much faster and cheaper. Thanks to competitive analysis and CJM, I created a logical app that is fully ready for launch and first real-user testing.'},t:'text'}],prev:{id:'esports',ru:'Киберспорт',en:'Esports'},next:null}
+/* ─── DATA ───
+   Images live in assets/v2/. To add a case: add an object below
+   and put its id into HOME_ORDER.
+   Section item: {img:'File.webp', cap:'Caption'} or {video:'file.mp4', cap:'...'}; cap is optional. */
+const A = 'assets/v2/';
+
+const CASES = {
+  'health-ring': {
+    title: "Health Ring", sub: "Health tracker, 2026", cover: "HealthRingCover.webp",
+    intro: [
+      "Task: Design a user interface for a health tracking app for a smart bracelet.",
+      "About the project — the app lets you track your health metrics and overall well-being.",
+      "What I did — I conducted research, competitive analysis, and data analysis, and designed a more user-friendly and informative app interface."
+    ],
+    sections: [
+      { title: "I conducted some research and analysis", desc: "I found three sources and summarized the main points.",
+        items: [{ img: "HealthRing1.webp" }] },
+      { title: "I formulated hypotheses and conducted a competitive analysis", desc: "It has become clearer what UI issues users are experiencing.",
+        items: [{ img: "HealthRing2.webp" }] },
+      { title: "UI", desc: "A dark theme for the interface featuring a health scale. The scale is based on a point system derived from the body's vital signs.",
+        items: [
+          { img: "HealthRing3.webp", cap: "All metrics at your fingertips, interactive charts, and AI-powered tips." },
+          { img: "HealthRing4.webp", cap: "A detailed interface for each metric." }
+        ] },
+      { title: "Mockups and User Journey", desc: "Examples of working mockups in Figma.",
+        items: [{ img: "HealthRing5.webp", cap: "A comment for each block, UI behavior, and states." }] },
+      { title: "Result", desc: "I got an answer to the main question: “How did I recover, and what should I do today?” It made more sense, and I got some clear advice for the day. I designed a scoring system to better understand the metrics." }
+    ]
+  },
+
+  'pony-express': {
+    title: "Pony Express", sub: "Logistics, 2023", cover: "PonyCover.webp",
+    intro: [
+      "Task: update the UI, improve UX and usability of the personal account, and work on service automation.",
+      "About the project — a service that lets users purchase goods from abroad with delivery.",
+      "What I did — redesigned the personal account, reduced support requests by 35%. Designed the order grouping into packages feature."
+    ],
+    sections: [
+      { title: "Orders", desc: "A flexible table. Group purchases into one package, split across addresses, track statuses in real time.",
+        items: [{ img: "Pony1.webp", cap: "Order status drives functionality: paid — pack it, in transit — track it." }] },
+      { title: "Cards", desc: "Cards. Same functionality as the table, different view.",
+        items: [{ img: "Pony2.webp", cap: "Many iterations and usability tests with 20+ users." }] },
+      { title: "Package", desc: "Track status, pack a purchase into a parcel, choose recipient and address, fill in customs declaration.",
+        items: [{ img: "Pony3.webp", cap: "Extensive research and competitive analysis." }] },
+      { title: "Order form, chat, calculator & profile", desc: "Additional screens to improve service automation and usability.",
+        items: [
+          { img: "Pony4.webp", cap: "Filled in all the info, added items, sent for buyback." },
+          { img: "Pony5.webp", cap: "Still have questions — support is available." },
+          { img: "Pony6.webp", cap: "Quickly calculate the delivery cost." },
+          { img: "Pony7.webp", cap: "Choose a recipient and send parcels to different addresses." }
+        ] },
+      { title: "Result", desc: "The full redesign reduced support requests by 35%. We received a lot of positive feedback after reworking the logic and navigation. The order grouping feature attracted business users." }
+    ]
+  },
+
+  'mbank': {
+    title: "MBank", sub: "Mobile Bank, 2023", cover: "MbankCover.webp",
+    intro: [
+      "Task: design the transaction history screen for a banking app.",
+      "About the project — a mobile bank, Top-15 in Russia, B2C.",
+      "What I did — designed filters and sorting based on usability tests and competitive analysis."
+    ],
+    sections: [
+      { title: "Filters", desc: "The main filter opens via an icon button. Contains flexible parameters for precise results.",
+        items: [{ img: "Mbank1.webp", cap: "Filter by wallet, account, period, and status." }] },
+      { title: "Search", desc: "Search through transaction history with smart suggestions.",
+        items: [{ img: "Mbank2.webp", cap: "Empty state and search results." }] },
+      { title: "Filter Result", desc: "Applied filters as tags, empty state and filtered results.",
+        items: [{ img: "Mbank3.webp", cap: "No results and filtered list." }] },
+      { title: "Transaction Detail and Spending Analytics", desc: "Transaction detail: status, amount, type, number, date. Expenses and revenues by month with filtering.",
+        items: [{ img: "Mbank4.webp", cap: "Based on popular UX patterns." }] },
+      { title: "Competitive Analysis", desc: "Analysed 5 banking apps: Sber, Tinkoff, Alfa, Ozon, Pochta.",
+        items: [{ img: "Mbank5.webp", cap: "Competitive analysis became the core research framework." }] },
+      { title: "Usability Testing", desc: "Ran usability tests on Tinkoff, Sber, and Alfa banking apps.",
+        items: [{ img: "Mbank6.webp", cap: "Conclusion: Alfa completed all scenario conditions." }] },
+      { title: "UX Research", desc: "Jobs-to-be-done and hypotheses based on research.",
+        items: [{ img: "Mbank7.webp", cap: "Features, IA, JTBD, and usability." }] },
+      { title: "Result", desc: "Competitive analysis became the core research framework. Usability tests provided the foundation for interface design." }
+    ]
+  },
+
+  'finity': {
+    title: "Finity", sub: "Crypto Exchange, 2025", cover: "FinityCover.webp",
+    intro: [
+      "Task: dive into crypto. Design a modern interface following CEX standards.",
+      "About the project — a centralised platform for trading and exchanging crypto on Web and Mobile.",
+      "What I did — learned crypto and designed P2P, Spot, and Copy Trading flows."
+    ],
+    sections: [
+      { title: "Home Screen", desc: "Balance with an adaptive chart, app news in video stories, and basic trading features.",
+        items: [{ img: "Finity1.webp", cap: "Home screen for a logged-in user." }] },
+      { title: "Wallet", desc: "A standard crypto wallet for deposits, top-ups, and withdrawals.",
+        items: [{ img: "Finity2.webp", cap: "Dark and light themes." }] },
+      { title: "Auth", desc: "Sign in or register by email or phone. Country code selection.",
+        items: [{ img: "Finity3.webp", cap: "Auth screen and country code selection." }] },
+      { title: "Verification", desc: "Verify identity through passport, ID card, or driver’s licence.",
+        items: [{ img: "Finit4.webp", cap: "Verification step and success screen." }] },
+      { title: "Dashboard", desc: "Portfolio chart with time filters. Actions: deposit, withdraw, swap.",
+        items: [{ img: "Finity5.webp", cap: "All analytics in one place." }] },
+      { title: "Spot", desc: "Interactive trading terminal with live data and flexible timeframes.",
+        items: [{ img: "Finity6.webp", cap: "Complex analytics in a clean interface." }] },
+      { title: "Copy Trading", desc: "Detailed trader stats, ROI, and ratios. Beginners can copy experienced traders.",
+        items: [{ img: "Finity7.webp", cap: "Choosing a strategy without opening the trader profile." }] },
+      { title: "P2P", desc: "Buy and sell crypto directly between users, with security guarantees.",
+        items: [
+          { img: "Finity8.webp" },
+          { img: "Finity9.webp", cap: "Deal management in chat with moderation and a timer." }
+        ] },
+      { title: "Analytics", desc: "4 key analytics charts: price, aggressor, order book imbalance, volatility.",
+        items: [{ img: "Finity10.webp", cap: "Interactive charts with configurable indicators." }] },
+      { title: "Calculator", desc: "Interactive earnings calculator for modelling investment scenarios.",
+        items: [{ img: "Finity11.webp", cap: "Flexible calculation system with analytics integration." }] },
+      { title: "Result", desc: "Together with experts and developers I designed an accessible interface, reducing task completion time (TCT) by 70% — users reach their first trade in just 3-4 minutes. Interactive charts and simple navigation make users feel more confident, as reflected in their feedback." }
+    ]
+  },
+
+  'orbitame': {
+    title: "Orbitame", sub: "Time tracker, 2026", cover: "OrbitameCover.webp",
+    intro: [
+      "This is the first product I've designed and developed on my own. I plan to release it on the App Store.",
+      "The app's concept is quite simple — it's a classic time tracker. The user sets a time with a gesture, focuses, and completes the task. Stack: Figma, Swift, SwiftUI, SwiftData, MVVM."
+    ],
+    sections: [
+      { title: "Onboarding", desc: "We'll demonstrate the app's core functionality using UI animations as an example.",
+        items: [{ video: "orbitime-onboarding.mp4", cap: "Of course, you can skip it." }] },
+      { title: "Timer Name", desc: "The user enters a name for the timer in free-form text.",
+        items: [{ img: "Orbitame1.webp", cap: "The text string adjusts to fit the number of characters." }] },
+      { title: "Timer States", desc: "The user sets the timer with a single gesture: pressing and holding in a circular motion.",
+        items: [{ img: "Orbitame2.webp", cap: "As you focus, the timer counts down." }] },
+      { title: "Functions During the Timer", desc: "There are options to pause, stop, and resume the timer. The user decides for themselves what to do.",
+        items: [{ img: "Orbitame3.webp", cap: "But before turning off the timer, we always ask the user to confirm the action." }] },
+      { title: "List of Timers", desc: "The timer has three states: completed, incompleted, and paused.",
+        items: [{ img: "Orbitame4.webp", cap: "You can always find the timer you need by date and start focusing again." }] },
+      { title: "Support the project", desc: "Since this is my first commercial product, I'd like to have the opportunity to develop it further.",
+        items: [{ img: "Orbitame5.webp", cap: "But that screen is tucked away :)" }] },
+      { title: "Result", desc: "At this time, the product is still in development, and I would appreciate any feedback." }
+    ]
+  },
+
+  'kamzumi': {
+    title: "Kamzumi", sub: "Food Delivery, 2024", cover: "KamzumiCover.webp",
+    intro: [
+      "Task: create an app for food delivery and pick-up.",
+      "About the project — a cross-platform app for a food delivery network.",
+      "What I did — simple order flow. Interface based on e-commerce best practices."
+    ],
+    sections: [
+      { title: "Menu", desc: "Users can pick a dish right away and keep browsing.",
+        items: [{ img: "Kamzumi1.webp", cap: "Vertical list. Sticky scroll of dish categories." }] },
+      { title: "All Dishes and Product Card", desc: "Redesigned the product card based on user survey data. A/B testing.",
+        items: [{ img: "Kamzumi2.webp", cap: "Structured information and clear presentation." }] },
+      { title: "Cart", desc: "A key e-commerce screen — directly impacts purchase conversion.",
+        items: [{ img: "Kamzumi3.webp", cap: "Interactive prototype and guerrilla testing." }] },
+      { title: "Checkout", desc: "Delivery or pickup, address, date, time, payment method.",
+        items: [{ img: "Kamzumi4.webp", cap: "Full order checkout flow." }] },
+      { title: "Order Status", desc: "Real-time order status tracking and order history.",
+        items: [{ img: "Kamzumi5.webp", cap: "In preparation status and all orders list." }] },
+      { title: "Result", desc: "In 3 months after the new design launch, order conversion grew by 25% and cart abandonment dropped by nearly a third. We simplified dish selection and checkout, so users buy faster, return more often, and the average order value increased by 15%." }
+    ]
+  },
+
+  'easy-travel': {
+    title: "Easy Travel", sub: "Aggregator, 2022", cover: "EasyTravelCover.webp",
+    intro: [
+      "Task: design an app for searching and booking hotels and tours online.",
+      "About the project — an online tourism aggregator.",
+      "What I did — designed the MVP for a native iOS app in 2 months."
+    ],
+    sections: [
+      { title: "Onboarding", desc: "Introductory screen for new users.",
+        items: [{ img: "EasyTravel1.webp", cap: "App welcome screen." }] },
+      { title: "Search and Filter", desc: "Find a tour by key parameters, precise filters, and sort results.",
+        items: [{ img: "EasyTravel2.webp", cap: "Quick selection and search with a simple filter." }] },
+      { title: "Results", desc: "Tour selection with key info. Each card: photos, distance to beach and airport.",
+        items: [{ img: "EasyTravel3.webp", cap: "List of offers and detailed hotel card." }] },
+      { title: "Hotel Tours", desc: "Tour list by date with prices from different tour operators.",
+        items: [{ img: "EasyTravel4.webp", cap: "Reviews and tour list." }] },
+      { title: "Trip Details", desc: "A critical conversion point. Styled like a classic flight ticket to build trust.",
+        items: [{ img: "EasyTravel5.webp", cap: "Users decide faster in a familiar format." }] },
+      { title: "Booking", desc: "4-step flow — customer data, tourists, summary, payment.",
+        items: [
+          { img: "EasyTravel6.webp", cap: "Customer data and tourist information." },
+          { img: "EasyTravel7.webp", cap: "Select card or add new one. Tour summary before payment." },
+          { img: "EasyTravel8.webp", cap: "Tour is booked. Ticket with QR code and details." }
+        ] },
+      { title: "Design Frameworks", desc: "Competitive Analysis, App Map, and CJM.",
+        items: [{ img: "EasyTravel9.webp" }, { img: "EasyTravel10.webp" }, { img: "EasyTravel11.webp" }] },
+      { title: "Result", desc: "I ended up with a dev-ready MVP layout. I did not reinvent the wheel — I used the official iOS 17 UIKit, so the interface feels familiar to Apple users and developers can build it much faster and cheaper. Thanks to competitive analysis and CJM, I created a logical app that is fully ready for launch and first real-user testing." }
+    ]
+  }
 };
 
-let lang='ru';
+/* Order of cards on the home page. 'soon' renders the placeholder card. */
+const HOME_ORDER = ['health-ring','pony-express','mbank','finity','orbitame','kamzumi','easy-travel','soon'];
 
-function setHeaderState(state){
-  const n=document.getElementById('headerNormal');
-  const c=document.getElementById('headerCase');
-  const sb=document.getElementById('caseSidebar');
-  if(state==='case'){
-    n.style.display='none';
-    c.classList.add('visible');
-    document.getElementById('langBtn2').textContent=lang.toUpperCase();
-    sb.style.display='flex';
-  } else {
-    n.style.display='';
-    c.classList.remove('visible');
-    sb.style.display='none';
-  }
-}
+/* Old v1 links keep working (#case-finity, #bank, ...) */
+const ALIASES = { 'bank':'mbank', 'case-bank':'mbank' };
 
-function showPage(name,el,pushState=true){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('page-'+name).classList.add('active');
-  document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
-  if(el) el.classList.add('active');
-  else document.querySelector('.nav-link[data-page="'+name+'"]')?.classList.add('active');
-  if(pushState) history.pushState({type:'page',name},'','#'+name);
-  setHeaderState('normal');
-  window.onscroll=null;
-  window.scrollTo(0,0);
-}
-
-function goHome(){
-  showPage('home',document.querySelector('.nav-link[data-page="home"]'));
-}
-
-window.addEventListener('popstate',function(e){
-  if(e.state&&e.state.type==='page') showPage(e.state.name,null,false);
-  else if(e.state&&e.state.type==='case') showCase(e.state.id,false);
-  else showPage('home',null,false);
-});
-
-function showCase(id,pushState=true){
-  window._currentCase=id;
-  const c=CASES[id];
-  setHeaderState('case');
-  document.getElementById('backLabel').textContent=lang==='ru'?'Главная':'Home';
-
-  document.getElementById('caseSidebar').innerHTML=
-    c.sections.map(s=>`<span class="sidebar-item" data-sid="${s.id}" onclick="jumpTo('${s.id}')">${s.title[lang]}</span>`).join('');
-
-  const titleHTML=c.nda
-    ?`*** <span class="badge" style="vertical-align:middle;margin-left:4px"><span class="badge-text">NDA</span></span>`
-    :c.title;
-
-  let h=`<div class="case-intro">
-    <p class="case-title">${titleHTML}</p>
-    <p class="case-type-lbl">${c.type[lang]}</p>
-    <div class="case-intro-body">${c.intro[lang].map(t=>`<p class="case-intro-text">${t}</p>`).join('')}</div>
-  </div>`;
-
-  c.sections.forEach(s=>{
-    h+=`<div class="case-block" id="${s.id}">`;
-    if(s.title) h+=`<p class="case-block-title">${s.title[lang]}</p>`;
-    if(s.desc)  h+=`<p class="case-block-desc">${s.desc[lang]}</p>`;
-    if(s.t!=='text'){
-      h+=ri(s.t,s.img||null,s.imgs||null,s.caps||null);
-      if(s.t!=='multi'&&s.cap)h+=`<p class="img-cap">${s.cap[lang]}</p>`;
+/* ─── HOME ─── */
+function renderHome(){
+  document.getElementById('grid').innerHTML = HOME_ORDER.map((id, i) => {
+    if (id === 'soon') {
+      return `<div class="card card-soon"><div class="card-img">Soon</div><div class="card-meta"></div></div>`;
     }
-    h+=`</div>`;
+    const c = CASES[id];
+    return `<a class="card" href="#${id}">
+      <div class="card-img"><img src="${A + c.cover}" alt="${c.title}" loading="${i < 2 ? 'eager' : 'lazy'}"></div>
+      <div class="card-meta"><p class="card-name">${c.title}</p><p class="card-sub">${c.sub}</p></div>
+    </a>`;
+  }).join('');
+}
+
+/* ─── CASE ─── */
+function renderItem(it){
+  const media = it.video
+    ? `<video class="media" src="${A + it.video}" autoplay muted loop playsinline preload="auto"></video>`
+    : `<img class="media" src="${A + it.img}" alt="" loading="lazy">`;
+  return `<div class="c-item">${media}${it.cap ? `<p class="cap">${it.cap}</p>` : ''}</div>`;
+}
+
+function renderCase(id){
+  const c = CASES[id];
+  let h = `<div class="c-head"><h1 class="c-title">${c.title}</h1><p class="c-sub">${c.sub}</p></div>
+    <img class="c-cover" src="${A + c.cover}" alt="${c.title}">
+    <div class="c-intro">${c.intro.map(t => `<p>${t}</p>`).join('')}</div>`;
+  c.sections.forEach(s => {
+    h += `<section class="c-sec"><div class="c-text"><h2 class="c-sec-title">${s.title}</h2>${s.desc ? `<p>${s.desc}</p>` : ''}</div>`;
+    (s.items || []).forEach(it => { h += renderItem(it); });
+    h += `</section>`;
   });
-
-  const pd=lang==='ru'?'Предыдущий':'Previous';
-  const nd=lang==='ru'?'Следующий':'Next';
-  h+=`<div class="case-nav">
-    <div class="case-nav-row1">
-      ${c.prev?`<span class="cnav-dir">${pd}</span>`:'<span></span>'}
-      ${c.next?`<span class="cnav-dir" style="text-align:right">${nd}</span>`:'<span></span>'}
-    </div>
-    <div class="case-nav-row2">
-      ${c.prev?`<span class="cnav-name" onclick="showCase('${c.prev.id}')">${c.prev[lang]}</span>`:'<span></span>'}
-      ${c.next?`<span class="cnav-name" style="text-align:right" onclick="showCase('${c.next.id}')">${c.next[lang]}</span>`:'<span></span>'}
-    </div>
-  </div>`;
-
-  document.getElementById('caseContent').innerHTML=h;
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('page-case').classList.add('active');
-  window.scrollTo(0,0);
-  window.onscroll=updateSidebar;
-  if(pushState) history.pushState({type:'case',id},'','#case-'+id);
+  document.getElementById('caseContent').innerHTML = h;
 }
 
-function ri(t,img,imgs,caps){
-  if(t==='full'){
-    const el=img?`<img src="${img}" class="img-ph img-full" alt="" loading="lazy" style="cursor:zoom-in" onclick="openLightbox('${img}')">`:`<div class="img-ph img-full"></div>`;
-    return`<div class="img-wrap">${el}</div>`;
-  }
-  if(t==='pair-web'&&imgs) return`<div class="screens-pair-web"><img src="${imgs[0]}" alt="" loading="lazy" style="cursor:zoom-in" onclick="openLightbox('${imgs[0]}')"><img src="${imgs[1]}" alt="" loading="lazy" style="cursor:zoom-in" onclick="openLightbox('${imgs[1]}')"></div>`;
-  if(t==='pair'){
-    if(imgs&&imgs.length>=2) return`<div class="screens-pair"><img src="${imgs[0]}" class="scr scr-l" alt="" loading="lazy" style="cursor:zoom-in" onclick="openLightbox('${imgs[0]}')"><img src="${imgs[1]}" class="scr scr-r" alt="" loading="lazy" style="cursor:zoom-in" onclick="openLightbox('${imgs[1]}')"></div>`;
-    return`<div class="screens-pair"><div class="scr scr-l"></div><div class="scr scr-r"></div></div>`;
-  }
-  if(t==='single'){
-    const el=img?`<img src="${img}" class="scr-c" alt="" loading="lazy" style="cursor:zoom-in" onclick="openLightbox('${img}')">`:`<div class="scr-c"></div>`;
-    return`<div class="screen-single">${el}</div>`;
-  }
-  if(t==='multi'&&imgs){
-    return imgs.map((src,i)=>{
-      const cap=(caps&&caps[lang]&&caps[lang][i])?`<p class="img-cap">${caps[lang][i]}</p>`:'';
-      return`<div style="margin-bottom:40px"><div class="img-wrap"><img src="${src}" class="img-ph img-full" alt="" loading="lazy" style="cursor:zoom-in" onclick="openLightbox('${src}')"></div>${cap}</div>`;
-    }).join('');
-  }
-  return'';
+/* ─── ROUTING: lerix.pro = home, lerix.pro/#finity = case ─── */
+let homeScroll = 0;
+let cameFromHome = false;
+
+function resolveId(hash){
+  let id = hash.replace(/^#/, '');
+  if (ALIASES[id]) id = ALIASES[id];
+  id = id.replace(/^case-/, '');
+  return CASES[id] ? id : '';
 }
-  
-  document.querySelectorAll('.concept-imgs img').forEach(img=>{
-  img.style.cursor='zoom-in';
-  img.addEventListener('click',()=>openLightbox(img.src));
+
+function route(){
+  const id = resolveId(location.hash);
+  const home = document.getElementById('home');
+  const cs = document.getElementById('case');
+  if (id) {
+    renderCase(id);
+    home.classList.remove('active');
+    cs.classList.add('active');
+    document.body.classList.add('is-case');
+    document.title = CASES[id].title + ' — Valeriy Protsenko';
+    window.scrollTo(0, 0);
+  } else {
+    cs.classList.remove('active');
+    home.classList.add('active');
+    document.body.classList.remove('is-case');
+    document.title = 'Valeriy Protsenko — Design Engineer';
+    if (location.hash || location.search) history.replaceState(null, '', location.pathname);
+    const y = homeScroll;
+    requestAnimationFrame(() => window.scrollTo(0, y));
+  }
+  updateHeaderHeight();
+}
+
+document.addEventListener('click', e => {
+  if (e.target.closest('a.card')) { homeScroll = window.scrollY; cameFromHome = true; }
 });
-function openLightbox(src){
-  document.getElementById('lightboxImg').src=src;
-  document.getElementById('lightbox').classList.add('open');
-}
-function closeLightbox(){
-  document.getElementById('lightbox').classList.remove('open');
-  document.getElementById('lightboxImg').src='';
-}
-document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLightbox();});
 
-function jumpTo(id){
-  const el=document.getElementById(id);
-  if(el) window.scrollTo({top:el.offsetTop-80,behavior:'smooth'});
-}
+document.getElementById('backBtn').addEventListener('click', () => {
+  if (cameFromHome) { cameFromHome = false; history.back(); }
+  else { history.pushState(null, '', location.pathname); homeScroll = 0; route(); }
+});
 
-function updateSidebar(){
-  document.querySelectorAll('.sidebar-item[data-sid]').forEach(item=>{
-    const el=document.getElementById(item.dataset.sid);
-    if(el) item.classList.toggle('active',el.offsetTop<=window.scrollY+160);
-  });
-}
+window.addEventListener('hashchange', route);
+window.addEventListener('popstate', () => { if (!location.hash) route(); });
 
-function toggleTheme(){
-  const r=document.documentElement;
-  const dark=r.getAttribute('data-theme')==='dark';
-  r.setAttribute('data-theme',dark?'':'dark');
-  localStorage.setItem('theme',dark?'light':'dark');
-}
+/* ─── LIGHTBOX ─── */
+const lb = document.getElementById('lb');
+const lbImg = document.getElementById('lbImg');
+function closeLb(){ lb.classList.remove('open'); lbImg.src = ''; }
+document.addEventListener('click', e => {
+  const img = e.target.closest('img.media');
+  if (img) { lbImg.src = img.src; lb.classList.add('open'); }
+});
+lb.addEventListener('click', closeLb);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
 
-function toggleLang(){
-  lang=lang==='ru'?'en':'ru';
-  const lbl=lang.toUpperCase();
-  document.getElementById('langBtn').textContent=lbl;
-  document.getElementById('langBtn2').textContent=lbl;
-  document.getElementById('backLabel').textContent=lang==='ru'?'Главная':'Home';
-  applyLang();
-  const url=new URL(window.location.href);
-  if(lang==='en') url.searchParams.set('lang','en');
-  else url.searchParams.delete('lang');
-  history.replaceState({},'',url.toString());
-  if(document.getElementById('page-case').classList.contains('active')&&window._currentCase){
-    showCase(window._currentCase,false);
-  }
+/* ─── HEADER HEIGHT → CSS var (mobile header wraps to 2-3 lines) ─── */
+function updateHeaderHeight(){
+  document.documentElement.style.setProperty('--hh', document.getElementById('hdr').offsetHeight + 'px');
 }
+window.addEventListener('resize', updateHeaderHeight);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(updateHeaderHeight);
 
-function applyLang(){
-  document.querySelectorAll('[data-ru][data-en]').forEach(el=>{
-    const v=el.getAttribute('data-'+lang);
-    if(v!==null&&!el.children.length) el.textContent=v;
-  });
-  const cl=document.getElementById('cases-label');
-  if(cl) cl.textContent=lang==='ru'?'Кейсы':'Cases';
-  const B={
-    ru:{name:'Валерий Проценко',role:'Дизайн-инженер',
-      b1:'Lead Product Designer в <a class="link-u" href="https://bibip.io/" target="_blank" rel="noopener">Bibip</a>, принимаю ключевые дизайн-решения, строю продукт.',
-      b2:'Специализируюсь на продуктовом дизайне и iOS-разработке. Основной фокус — дизайн-системы, usability, масштабирование и консистентность. Являюсь «мостом» между UX/UI дизайном и разработкой под iOS.',
-      b3:'За 7+ лет опыта я работал как в стартапах, так и в продуктовых компаниях: FinTech, E-commerce, Delivery, EdTech, Esports, Crypto и Web3.',
-      b4:'Увлекаюсь технологиями, космосом, фотографией и гитарой.',
-      b5:'Можно найти меня на <a class="link-u" href="https://www.linkedin.com/in/valprotsenko/" target="_blank" rel="noopener">LinkedIn</a>, посмотреть на <a class="link-u" href="https://www.youtube.com/@valera_ui" target="_blank" rel="noopener">YouTube</a>, написать в <a class="link-u" href="https://t.me/valeriy_ui" target="_blank" rel="noopener">Telegram</a> и <a class="link-u" href="mailto:valgholz@gmail.com">Email</a>.'},
-    en:{name:'Valeriy Protsenko',role:'Design Engineer',
-      b1:'Lead Product Designer at <a class="link-u" href="https://bibip.io/" target="_blank" rel="noopener">Bibip</a>, making key design decisions and building the product.',
-      b2:"I specialise in product design and iOS development. My focus — design systems, usability, scaling, and consistency. I act as a bridge between UX/UI design and iOS development.",
-      b3:"Over 7+ years I've worked in startups and product companies: FinTech, E-commerce, Delivery, EdTech, Esports, Crypto and Web3.",
-      b4:'Passionate about technology, space, photography, and guitar.',
-      b5:'Find me on <a class="link-u" href="https://www.linkedin.com/in/valprotsenko/" target="_blank" rel="noopener">LinkedIn</a>, watch on <a class="link-u" href="https://www.youtube.com/@valera_ui" target="_blank" rel="noopener">YouTube</a>, message me on <a class="link-u" href="https://t.me/valeriy_ui" target="_blank" rel="noopener">Telegram</a> or <a class="link-u" href="mailto:valgholz@gmail.com">Email</a>.'}
-  };
-  const t=B[lang];
-  const s=(id,html)=>{const e=document.getElementById(id);if(e)e.innerHTML=html;};
-  s('bio-name',t.name);s('bio-role',t.role);
-  s('bio-1',t.b1);s('bio-2',t.b2);s('bio-3',t.b3);s('bio-4',t.b4);s('bio-5',t.b5);
-}
-
-(function(){
-  if(localStorage.getItem('theme')==='dark')document.documentElement.setAttribute('data-theme','dark');
-  const urlLang=new URLSearchParams(window.location.search).get('lang');
-  if(urlLang==='en'&&lang!=='en'){lang='en';document.getElementById('langBtn').textContent='EN';document.getElementById('langBtn2').textContent='EN';applyLang();}
-  const hash=window.location.hash.replace('#','');
-  if(hash&&hash.startsWith('case-')){
-    const caseId=hash.replace('case-','');
-    if(CASES[caseId]) showCase(caseId,false);
-  } else if(hash&&['home','about','cv','concepts'].includes(hash)){
-    showPage(hash,null,false);
-  }
-})();
+/* ─── INIT ─── */
+renderHome();
+route();
 </script>
 </body>
 </html>
