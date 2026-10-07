@@ -108,7 +108,8 @@ img.media{cursor:zoom-in}
 
   .home{padding-top:calc(var(--hh) + 40px)}
   .intro{font-size:20px;line-height:28px;margin-bottom:40px}
-  .grid{grid-template-columns:1fr;row-gap:40px} .d-br{display:none}
+  .grid{grid-template-columns:1fr;row-gap:40px}
+  .d-br{display:none}
   .card-img{border-radius:24px}
   .footer{padding:68px 0 24px}
 
@@ -150,7 +151,7 @@ img.media{cursor:zoom-in}
 <!-- ══ HOME ══ -->
 <main class="view home active" id="home">
   <div class="wrap">
-    <p class="intro">With 7 years of experience in UX/UI and Product Design,<br class="d-br">I moved into iOS development to close the gap between design and engineering. Now I work as a Design Engineer:<br>I think in systems, prototype in code, and ship interfaces that feel as good as they look.</p>
+    <p class="intro">After 7 years in UX/UI and product design,<br class="d-br">I moved into iOS development to close the gap between design and engineering. Now I work as a Design Engineer:<br>I think in systems, prototype in code, and ship interfaces that feel as good as they look.</p>
     <div class="grid" id="grid"></div>
   </div>
   <footer class="footer">Valeriy P. © 2026, v 2.0</footer>
@@ -175,184 +176,184 @@ const CASES = {
   'health-ring': {
     title: "Health Ring", sub: "Health tracker, 2026", cover: "HealthRingCover.webp",
     intro: [
-      "Task: Design a user interface for a health tracking app for a smart bracelet.",
-      "About the project — the app lets you track your health metrics and overall well-being.",
-      "What I did — I conducted research, competitive analysis, and data analysis, and designed a more user-friendly and informative app interface."
+      "Task: Design an app for a smart ring that tracks your health.",
+      "About the project: The app shows your health metrics and how you feel overall.",
+      "What I did: I did research, competitive and data analysis, and designed a clearer, more useful interface."
     ],
     sections: [
-      { title: "I conducted some research and analysis", desc: "I found three sources and summarized the main points.",
+      { title: "Research", desc: "I studied three sources and pulled out the key points.",
         items: [{ img: "HealthRing1.webp" }] },
-      { title: "I formulated hypotheses and conducted a competitive analysis", desc: "It has become clearer what UI issues users are experiencing.",
+      { title: "Hypotheses and Competitive Analysis", desc: "This showed which UI problems users actually run into.",
         items: [{ img: "HealthRing2.webp" }] },
-      { title: "UI", desc: "A dark theme for the interface featuring a health scale. The scale is based on a point system derived from the body's vital signs.",
+      { title: "UI", desc: "A dark interface built around a health score. The score is calculated from the body's vital signs.",
         items: [
           { img: "HealthRing3.webp", cap: "All metrics at your fingertips, interactive charts, and AI-powered tips." },
-          { img: "HealthRing4.webp", cap: "A detailed interface for each metric." }
+          { img: "HealthRing4.webp", cap: "A detailed screen for each metric." }
         ] },
-      { title: "Mockups and User Journey", desc: "Examples of working mockups in Figma.",
-        items: [{ img: "HealthRing5.webp", cap: "A comment for each block, UI behavior, and states." }] },
-      { title: "Result", desc: "I got an answer to the main question: “How did I recover, and what should I do today?” It made more sense, and I got some clear advice for the day. I designed a scoring system to better understand the metrics." }
+      { title: "Mockups and User Journey", desc: "How the mockups look in Figma.",
+        items: [{ img: "HealthRing5.webp", cap: "Each block has notes on how it behaves and what states it has." }] },
+      { title: "Result", desc: "The app now answers the main question: “How well did I recover, and what should I do today?” The data is easier to read, the user gets clear tips for the day, and one simple score sums up all the metrics." }
     ]
   },
 
   'pony-express': {
     title: "Pony Express", sub: "Logistics, 2023", cover: "PonyCover.webp",
     intro: [
-      "Task: update the UI, improve UX and usability of the personal account, and work on service automation.",
-      "About the project — a service that lets users purchase goods from abroad with delivery.",
-      "What I did — redesigned the personal account, reduced support requests by 35%. Designed the order grouping into packages feature."
+      "Task: Update the UI, make the personal account easier to use, and automate parts of the service.",
+      "About the project: A service that lets people buy goods from abroad and get them delivered.",
+      "What I did: I redesigned the personal account and added a feature for grouping orders into parcels."
     ],
     sections: [
-      { title: "Orders", desc: "A flexible table. Group purchases into one package, split across addresses, track statuses in real time.",
+      { title: "Orders", desc: "A flexible table. Users can group purchases into one parcel, send them to different addresses, and track their status in real time.",
         items: [{ img: "Pony1.webp", cap: "Order status drives functionality: paid — pack it, in transit — track it." }] },
-      { title: "Cards", desc: "Cards. Same functionality as the table, different view.",
+      { title: "Cards", desc: "The same orders as cards: same features, different view. Some users find it easier.",
         items: [{ img: "Pony2.webp", cap: "Many iterations and usability tests with 20+ users." }] },
-      { title: "Package", desc: "Track status, pack a purchase into a parcel, choose recipient and address, fill in customs declaration.",
-        items: [{ img: "Pony3.webp", cap: "Extensive research and competitive analysis." }] },
-      { title: "Order form, chat, calculator & profile", desc: "Additional screens to improve service automation and usability.",
+      { title: "Parcel", desc: "Here users can track the status, pack purchases into a parcel, choose a recipient and address, and fill in the customs declaration.",
+        items: [{ img: "Pony3.webp", cap: "Lots of research and competitive analysis." }] },
+      { title: "Order Form, Chat, Calculator & Profile", desc: "Extra screens that make the service more automated and easier to use.",
         items: [
-          { img: "Pony4.webp", cap: "Filled in all the info, added items, sent for buyback." },
-          { img: "Pony5.webp", cap: "Still have questions — support is available." },
-          { img: "Pony6.webp", cap: "Quickly calculate the delivery cost." },
+          { img: "Pony4.webp", cap: "Fill in the details, add items, and we buy them for you." },
+          { img: "Pony5.webp", cap: "Questions? Support is right there in the chat." },
+          { img: "Pony6.webp", cap: "Quickly work out the delivery cost." },
           { img: "Pony7.webp", cap: "Choose a recipient and send parcels to different addresses." }
         ] },
-      { title: "Result", desc: "The full redesign reduced support requests by 35%. We received a lot of positive feedback after reworking the logic and navigation. The order grouping feature attracted business users." }
+      { title: "Result", desc: "The redesign cut support requests by 35%. After we reworked the logic and navigation, we got a lot of positive feedback. The parcel grouping feature brought in business users." }
     ]
   },
 
   'mbank': {
-    title: "MBank", sub: "Mobile Bank, 2023", cover: "MbankCover.webp",
+    title: "MBank", sub: "Mobile bank, 2023", cover: "MbankCover.webp",
     intro: [
-      "Task: design the transaction history screen for a banking app.",
-      "About the project — a mobile bank, Top-15 in Russia, B2C.",
-      "What I did — designed filters and sorting based on usability tests and competitive analysis."
+      "Task: Design the transaction history screen for a banking app.",
+      "About the project: A mobile bank from Russia's top 15, for personal customers.",
+      "What I did: I designed filters, search, and sorting based on usability tests and competitive analysis."
     ],
     sections: [
-      { title: "Filters", desc: "The main filter opens via an icon button. Contains flexible parameters for precise results.",
+      { title: "Filters", desc: "All filters open from one button and help narrow down the results.",
         items: [{ img: "Mbank1.webp", cap: "Filter by wallet, account, period, and status." }] },
-      { title: "Search", desc: "Search through transaction history with smart suggestions.",
+      { title: "Search", desc: "Search through your history with smart suggestions.",
         items: [{ img: "Mbank2.webp", cap: "Empty state and search results." }] },
-      { title: "Filter Result", desc: "Applied filters as tags, empty state and filtered results.",
-        items: [{ img: "Mbank3.webp", cap: "No results and filtered list." }] },
-      { title: "Transaction Detail and Spending Analytics", desc: "Transaction detail: status, amount, type, number, date. Expenses and revenues by month with filtering.",
-        items: [{ img: "Mbank4.webp", cap: "Based on popular UX patterns." }] },
-      { title: "Competitive Analysis", desc: "Analysed 5 banking apps: Sber, Tinkoff, Alfa, Ozon, Pochta.",
-        items: [{ img: "Mbank5.webp", flat: true, cap: "Competitive analysis became the core research framework." }] },
-      { title: "Usability Testing", desc: "Ran usability tests on Tinkoff, Sber, and Alfa banking apps.",
-        items: [{ img: "Mbank6.webp", flat: true, cap: "Conclusion: Alfa completed all scenario conditions." }] },
-      { title: "UX Research", desc: "Jobs-to-be-done and hypotheses based on research.",
-        items: [{ img: "Mbank7.webp", flat: true, cap: "Features, IA, JTBD, and usability." }] },
-      { title: "Result", desc: "Competitive analysis became the core research framework. Usability tests provided the foundation for interface design." }
+      { title: "Filter Results", desc: "Selected filters show up as tags, so they are easy to see and remove.",
+        items: [{ img: "Mbank3.webp", cap: "No results and a filtered list." }] },
+      { title: "Transaction Details and Spending", desc: "The transaction screen shows the status, amount, type, number, and date. Spending and income are shown by month.",
+        items: [{ img: "Mbank4.webp", cap: "Based on familiar UX patterns." }] },
+      { title: "Competitive Analysis", desc: "I looked at 5 banking apps: Sber, Tinkoff, Alfa, Ozon, and Pochta.",
+        items: [{ img: "Mbank5.webp", flat: true, cap: "This became the base for the whole research." }] },
+      { title: "Usability Testing", desc: "I asked people to find a specific payment in the Tinkoff, Sber, and Alfa apps.",
+        items: [{ img: "Mbank6.webp", flat: true, cap: "Only in Alfa could users complete the whole task." }] },
+      { title: "UX Research", desc: "User questions, ideas, and hypotheses based on the research.",
+        items: [{ img: "Mbank7.webp", flat: true, cap: "What users need and what the app has to do." }] },
+      { title: "Result", desc: "Research showed where users get stuck when looking for a payment. Based on it, I designed filters, search, and a transaction screen that help find any payment in a few taps." }
     ]
   },
 
   'finity': {
-    title: "Finity", sub: "Crypto Exchange, 2025", cover: "FinityCover.webp",
+    title: "Finity", sub: "Crypto exchange, 2025", cover: "FinityCover.webp",
     intro: [
-      "Task: dive into crypto. Design a modern interface following CEX standards.",
-      "About the project — a centralised platform for trading and exchanging crypto on Web and Mobile.",
-      "What I did — learned crypto and designed P2P, Spot, and Copy Trading flows."
+      "Task: Get into crypto and design a modern interface that follows the standards of big crypto exchanges.",
+      "About the project: A centralized platform for trading and exchanging crypto on web and mobile.",
+      "What I did: I learned how crypto works and designed P2P, Spot, and Copy Trading."
     ],
     sections: [
       { title: "Home Screen", desc: "Balance with an adaptive chart, app news in video stories, and basic trading features.",
         items: [{ img: "Finity1.webp", cap: "Home screen for a logged-in user." }] },
       { title: "Wallet", desc: "A standard crypto wallet for deposits, top-ups, and withdrawals.",
         items: [{ img: "Finity2.webp", cap: "Dark and light themes." }] },
-      { title: "Auth", desc: "Sign in or register by email or phone. Country code selection.",
+      { title: "Auth", desc: "Sign in or sign up with email or phone, with country code selection.",
         items: [{ img: "Finity3.webp", cap: "Auth screen and country code selection." }] },
-      { title: "Verification", desc: "Verify identity through passport, ID card, or driver’s licence.",
+      { title: "Verification", desc: "Users can verify their identity with a passport, ID card, or driver's license.",
         items: [{ img: "Finit4.webp", cap: "Verification step and success screen." }] },
-      { title: "Dashboard", desc: "Portfolio chart with time filters. Actions: deposit, withdraw, swap.",
+      { title: "Dashboard", desc: "A portfolio chart with time filters and quick actions: deposit, withdraw, swap.",
         items: [{ img: "Finity5.webp", cap: "All analytics in one place." }] },
-      { title: "Spot", desc: "Interactive trading terminal with live data and flexible timeframes.",
+      { title: "Spot", desc: "An interactive trading terminal with live data and flexible timeframes.",
         items: [{ img: "Finity6.webp", cap: "Complex analytics in a clean interface." }] },
-      { title: "Copy Trading", desc: "Detailed trader stats, ROI, and ratios. Beginners can copy experienced traders.",
+      { title: "Copy Trading", desc: "Detailed trader stats, ROI, and other numbers. Beginners can copy experienced traders.",
         items: [{ img: "Finity7.webp", cap: "Choosing a strategy without opening the trader profile." }] },
-      { title: "P2P", desc: "Buy and sell crypto directly between users, with security guarantees.",
+      { title: "P2P", desc: "Buy and sell crypto directly between users, safely.",
         items: [
           { img: "Finity8.webp" },
           { img: "Finity9.webp", cap: "Deal management in chat with moderation and a timer." }
         ] },
-      { title: "Analytics", desc: "4 key analytics charts: price, aggressor, order book imbalance, volatility.",
+      { title: "Analytics", desc: "4 key charts: price, aggressor, order book imbalance, and volatility.",
         items: [{ img: "Finity10.webp", cap: "Interactive charts with configurable indicators." }] },
-      { title: "Calculator", desc: "Interactive earnings calculator for modelling investment scenarios.",
-        items: [{ img: "Finity11.webp", cap: "Flexible calculation system with analytics integration." }] },
-      { title: "Result", desc: "Together with experts and developers I designed an accessible interface, reducing task completion time (TCT) by 70% — users reach their first trade in just 3-4 minutes. Interactive charts and simple navigation make users feel more confident, as reflected in their feedback." }
+      { title: "Calculator", desc: "An interactive calculator that shows how much you can earn.",
+        items: [{ img: "Finity11.webp", cap: "Flexible calculations connected to analytics." }] },
+      { title: "Result", desc: "Together with experts and developers, I designed an easy-to-use interface and cut task completion time by 70%: users now make their first trade in just 3–4 minutes. Interactive charts and simple navigation make people feel more confident, and their feedback shows it." }
     ]
   },
 
   'orbitame': {
-    title: "Orbitame", sub: "Time tracker, 2026", cover: "OrbitameCover.webp",
+    title: "Orbitame", sub: "Focus timer, 2026", cover: "OrbitameCover.webp",
     intro: [
-      "This is the first product I've designed and developed on my own. I plan to release it on the App Store.",
-      "The app's concept is quite simple — it's a classic time tracker. The user sets a time with a gesture, focuses, and completes the task. Stack: Figma, Swift, SwiftUI, SwiftData, MVVM."
+      "This is the first product I've designed and built on my own. I plan to release it on the App Store.",
+      "The idea is simple: it's a focus timer. You set the time with one gesture, focus, and finish the task. Stack: Figma, Swift, SwiftUI, SwiftData, MVVM."
     ],
     sections: [
-      { title: "Onboarding", desc: "We'll demonstrate the app's core functionality using UI animations as an example.",
+      { title: "Onboarding", desc: "The onboarding shows how the app works through short animations.",
         items: [{ video: "orbitime-onboarding.mp4", cap: "Of course, you can skip it." }] },
-      { title: "Timer Name", desc: "The user enters a name for the timer in free-form text.",
-        items: [{ img: "Orbitame1.webp", cap: "The text string adjusts to fit the number of characters." }] },
-      { title: "Timer States", desc: "The user sets the timer with a single gesture: pressing and holding in a circular motion.",
+      { title: "Timer Name", desc: "You can give the timer any name you like.",
+        items: [{ img: "Orbitame1.webp", cap: "The text resizes to fit the name." }] },
+      { title: "Timer States", desc: "You set the timer with one gesture: press and drag in a circle.",
         items: [{ img: "Orbitame2.webp", cap: "As you focus, the timer counts down." }] },
-      { title: "Functions During the Timer", desc: "There are options to pause, stop, and resume the timer. The user decides for themselves what to do.",
-        items: [{ img: "Orbitame3.webp", cap: "But before turning off the timer, we always ask the user to confirm the action." }] },
-      { title: "List of Timers", desc: "The timer has three states: completed, incompleted, and paused.",
-        items: [{ img: "Orbitame4.webp", cap: "You can always find the timer you need by date and start focusing again." }] },
-      { title: "Support the project", desc: "Since this is my first commercial product, I'd like to have the opportunity to develop it further.",
+      { title: "Functions During the Timer", desc: "You can pause, stop, or resume the timer at any time.",
+        items: [{ img: "Orbitame3.webp", cap: "Before stopping the timer, the app always asks you to confirm." }] },
+      { title: "List of Timers", desc: "Each timer has one of three states: completed, unfinished, or paused.",
+        items: [{ img: "Orbitame4.webp", cap: "Find any timer by date and start focusing again." }] },
+      { title: "Support the Project", desc: "This is my first commercial product, and I'd love to keep developing it.",
         items: [{ img: "Orbitame5.webp", cap: "But that screen is tucked away :)" }] },
-      { title: "Result", desc: "At this time, the product is still in development, and I would appreciate any feedback." }
+      { title: "Result", desc: "The app is still in development — I'd love to hear your feedback." }
     ]
   },
 
   'kamzumi': {
-    title: "Kamzumi", sub: "Food Delivery, 2024", cover: "KamzumiCover.webp",
+    title: "Kamzumi", sub: "Food delivery, 2024", cover: "KamzumiCover.webp",
     intro: [
-      "Task: create an app for food delivery and pick-up.",
-      "About the project — a cross-platform app for a food delivery network.",
-      "What I did — simple order flow. Interface based on e-commerce best practices."
+      "Task: Create an app for food delivery and pickup.",
+      "About the project: A cross-platform app for a food delivery chain.",
+      "What I did: I made ordering quick and simple, using what already works well in e-commerce."
     ],
     sections: [
       { title: "Menu", desc: "Users can pick a dish right away and keep browsing.",
-        items: [{ img: "Kamzumi1.webp", cap: "Vertical list. Sticky scroll of dish categories." }] },
-      { title: "All Dishes and Product Card", desc: "Redesigned the product card based on user survey data. A/B testing.",
-        items: [{ img: "Kamzumi2.webp", cap: "Structured information and clear presentation." }] },
-      { title: "Cart", desc: "A key e-commerce screen — directly impacts purchase conversion.",
-        items: [{ img: "Kamzumi3.webp", cap: "Interactive prototype and guerrilla testing." }] },
-      { title: "Checkout", desc: "Delivery or pickup, address, date, time, payment method.",
-        items: [{ img: "Kamzumi4.webp", cap: "Full order checkout flow." }] },
-      { title: "Order Status", desc: "Real-time order status tracking and order history.",
-        items: [{ img: "Kamzumi5.webp", cap: "In preparation status and all orders list." }] },
+        items: [{ img: "Kamzumi1.webp", cap: "A vertical list with sticky dish categories." }] },
+      { title: "All Dishes and Product Card", desc: "I redesigned the product card based on a user survey and checked it with A/B tests.",
+        items: [{ img: "Kamzumi2.webp", cap: "Clear structure and simple presentation." }] },
+      { title: "Cart", desc: "A key screen in e-commerce: it directly affects how many people complete their order.",
+        items: [{ img: "Kamzumi3.webp", cap: "I built an interactive prototype and ran quick tests with real people." }] },
+      { title: "Checkout", desc: "Delivery or pickup, address, date, time, and payment method.",
+        items: [{ img: "Kamzumi4.webp", cap: "The full checkout flow." }] },
+      { title: "Order Status", desc: "Real-time order tracking and order history.",
+        items: [{ img: "Kamzumi5.webp", cap: "Order in progress and the list of all orders." }] },
       { title: "Result", desc: "In 3 months after the new design launch, order conversion grew by 25% and cart abandonment dropped by nearly a third. We simplified dish selection and checkout, so users buy faster, return more often, and the average order value increased by 15%." }
     ]
   },
 
   'easy-travel': {
-    title: "Easy Travel", sub: "Aggregator, 2022", cover: "EasyTravelCover.webp",
+    title: "Easy Travel", sub: "Travel aggregator, 2022", cover: "EasyTravelCover.webp",
     intro: [
-      "Task: design an app for searching and booking hotels and tours online.",
-      "About the project — an online tourism aggregator.",
-      "What I did — designed the MVP for a native iOS app in 2 months."
+      "Task: Design an app for finding and booking hotels and tours online.",
+      "About the project: An online travel aggregator.",
+      "What I did: I designed the MVP of a native iOS app in 2 months."
     ],
     sections: [
-      { title: "Onboarding", desc: "Introductory screen for new users.",
+      { title: "Onboarding", desc: "An introductory screen for new users.",
         items: [{ img: "EasyTravel1.webp", cap: "App welcome screen." }] },
-      { title: "Search and Filter", desc: "Find a tour by key parameters, precise filters, and sort results.",
-        items: [{ img: "EasyTravel2.webp", cap: "Quick selection and search with a simple filter." }] },
-      { title: "Results", desc: "Tour selection with key info. Each card: photos, distance to beach and airport.",
-        items: [{ img: "EasyTravel3.webp", cap: "List of offers and detailed hotel card." }] },
-      { title: "Hotel Tours", desc: "Tour list by date with prices from different tour operators.",
-        items: [{ img: "EasyTravel4.webp", cap: "Reviews and tour list." }] },
-      { title: "Trip Details", desc: "A critical conversion point. Styled like a classic flight ticket to build trust.",
-        items: [{ img: "EasyTravel5.webp", cap: "Users decide faster in a familiar format." }] },
-      { title: "Booking", desc: "4-step flow — customer data, tourists, summary, payment.",
+      { title: "Search and Filter", desc: "Find a tour by key parameters, use precise filters, and sort the results.",
+        items: [{ img: "EasyTravel2.webp", cap: "Quick search with a simple filter." }] },
+      { title: "Results", desc: "Tours with the key info. Each card shows photos and the distance to the beach and airport.",
+        items: [{ img: "EasyTravel3.webp", cap: "A list of offers and a detailed hotel card." }] },
+      { title: "Hotel Tours", desc: "Tours sorted by date, with prices from different tour operators.",
+        items: [{ img: "EasyTravel4.webp", cap: "Reviews and the list of tours." }] },
+      { title: "Trip Details", desc: "A key moment before booking. I styled it like a classic plane ticket to build trust.",
+        items: [{ img: "EasyTravel5.webp", cap: "People decide faster when the format feels familiar." }] },
+      { title: "Booking", desc: "4 steps: customer data, tourists, summary, and payment.",
         items: [
           { img: "EasyTravel6.webp", cap: "Customer data and tourist information." },
-          { img: "EasyTravel7.webp", cap: "Select card or add new one. Tour summary before payment." },
-          { img: "EasyTravel8.webp", cap: "Tour is booked. Ticket with QR code and details." }
+          { img: "EasyTravel7.webp", cap: "Select a card or add a new one. Tour summary before payment." },
+          { img: "EasyTravel8.webp", cap: "The tour is booked. A ticket with a QR code and all the details." }
         ] },
-      { title: "Design Frameworks", desc: "Competitive Analysis, App Map, and CJM.",
+      { title: "Research", desc: "Competitors, app map, and customer journey map.",
         items: [{ img: "EasyTravel9.webp", flat: true }, { img: "EasyTravel10.webp", flat: true }, { img: "EasyTravel11.webp", flat: true }] },
-      { title: "Result", desc: "I ended up with a dev-ready MVP layout. I did not reinvent the wheel — I used the official iOS 17 UIKit, so the interface feels familiar to Apple users and developers can build it much faster and cheaper. Thanks to competitive analysis and CJM, I created a logical app that is fully ready for launch and first real-user testing." }
+      { title: "Result", desc: "I ended up with a dev-ready MVP. I didn't reinvent the wheel: I used the official iOS 17 UIKit, so the app feels familiar to Apple users and developers can build it faster and cheaper. Thanks to competitive analysis and the customer journey map, the app is logical and ready for launch and its first tests with real users." }
     ]
   }
 };
