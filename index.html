@@ -34,7 +34,7 @@ img,video{display:block;max-width:100%}
 
 /* ─── HEADER (fixed on all devices) ─── */
 .hdr{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,.36);-webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px)}
-.hdr-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:18px 30px}
+.hdr-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:12px 30px}
 .hdr-left{display:flex;align-items:center;gap:80px;min-width:0}
 .hdr-name{font-weight:600;font-size:15px;line-height:24px;white-space:nowrap}
 .hdr-sub{font-size:14px;line-height:20px;color:var(--secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
@@ -79,6 +79,9 @@ body.is-case .hdr-case{display:flex}
 .c-item + .c-item{margin-top:60px}
 .media{width:100%;height:auto;border-radius:64px;background:var(--card)}
 img.media{cursor:zoom-in}
+.media.flat{border-radius:0!important;background:none}
+.video-frame{width:100%;aspect-ratio:880/731;background:#000;border-radius:64px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.video-frame video{width:34.43%;aspect-ratio:303/606;height:auto;object-fit:cover}
 .cap{margin-top:12px;text-align:center;font-size:16px;line-height:24px;color:var(--secondary)}
 
 /* ─── LIGHTBOX ─── */
@@ -106,7 +109,7 @@ img.media{cursor:zoom-in}
   .footer{padding:60px 0 32px}
 
   .case{padding-top:calc(var(--hh) + 40px);padding-bottom:100px}
-  .c-cover,.media{border-radius:24px}
+  .c-cover,.media,.video-frame{border-radius:24px}
   .c-intro{margin-top:16px}
   .c-sec{margin-top:100px}
   .c-item + .c-item{margin-top:40px}
@@ -230,11 +233,11 @@ const CASES = {
       { title: "Transaction Detail and Spending Analytics", desc: "Transaction detail: status, amount, type, number, date. Expenses and revenues by month with filtering.",
         items: [{ img: "Mbank4.webp", cap: "Based on popular UX patterns." }] },
       { title: "Competitive Analysis", desc: "Analysed 5 banking apps: Sber, Tinkoff, Alfa, Ozon, Pochta.",
-        items: [{ img: "Mbank5.webp", cap: "Competitive analysis became the core research framework." }] },
+        items: [{ img: "Mbank5.webp", flat: true, cap: "Competitive analysis became the core research framework." }] },
       { title: "Usability Testing", desc: "Ran usability tests on Tinkoff, Sber, and Alfa banking apps.",
-        items: [{ img: "Mbank6.webp", cap: "Conclusion: Alfa completed all scenario conditions." }] },
+        items: [{ img: "Mbank6.webp", flat: true, cap: "Conclusion: Alfa completed all scenario conditions." }] },
       { title: "UX Research", desc: "Jobs-to-be-done and hypotheses based on research.",
-        items: [{ img: "Mbank7.webp", cap: "Features, IA, JTBD, and usability." }] },
+        items: [{ img: "Mbank7.webp", flat: true, cap: "Features, IA, JTBD, and usability." }] },
       { title: "Result", desc: "Competitive analysis became the core research framework. Usability tests provided the foundation for interface design." }
     ]
   },
@@ -344,7 +347,7 @@ const CASES = {
           { img: "EasyTravel8.webp", cap: "Tour is booked. Ticket with QR code and details." }
         ] },
       { title: "Design Frameworks", desc: "Competitive Analysis, App Map, and CJM.",
-        items: [{ img: "EasyTravel9.webp" }, { img: "EasyTravel10.webp" }, { img: "EasyTravel11.webp" }] },
+        items: [{ img: "EasyTravel9.webp", flat: true }, { img: "EasyTravel10.webp", flat: true }, { img: "EasyTravel11.webp", flat: true }] },
       { title: "Result", desc: "I ended up with a dev-ready MVP layout. I did not reinvent the wheel — I used the official iOS 17 UIKit, so the interface feels familiar to Apple users and developers can build it much faster and cheaper. Thanks to competitive analysis and CJM, I created a logical app that is fully ready for launch and first real-user testing." }
     ]
   }
@@ -373,8 +376,8 @@ function renderHome(){
 /* ─── CASE ─── */
 function renderItem(it){
   const media = it.video
-    ? `<video class="media" src="${A + it.video}" autoplay muted loop playsinline preload="auto"></video>`
-    : `<img class="media" src="${A + it.img}" alt="" loading="lazy">`;
+    ? `<div class="video-frame"><video src="${A + it.video}" autoplay muted loop playsinline preload="auto"></video></div>`
+    : `<img class="media${it.flat ? ' flat' : ''}" src="${A + it.img}" alt="" loading="lazy">`;
   return `<div class="c-item">${media}${it.cap ? `<p class="cap">${it.cap}</p>` : ''}</div>`;
 }
 
