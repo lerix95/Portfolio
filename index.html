@@ -58,7 +58,8 @@ body.is-case .hdr-case{display:flex}
 .grid{display:grid;grid-template-columns:1fr 1fr;column-gap:20px;row-gap:40px}
 .card{display:flex;flex-direction:column;gap:16px;align-items:center}
 .card-img{width:100%;aspect-ratio:430/364;border-radius:32px;background:var(--card);overflow:hidden}
-.card-img img{width:100%;height:100%;object-fit:cover}
+.card-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+@media (hover:hover){.card:hover .card-img img{transform:scale(1.04)}}
 .card-meta{display:flex;flex-direction:column;gap:4px;align-items:center;text-align:center;min-height:48px}
 .card-name{font-weight:500;font-size:16px;line-height:24px}
 .card-sub{font-size:14px;line-height:20px;color:var(--secondary)}
@@ -415,6 +416,7 @@ function route(){
     cs.classList.add('active');
     document.body.classList.add('is-case');
     document.title = CASES[id].title + ' — Valeriy Protsenko';
+    if (window.smoothStop) smoothStop();
     window.scrollTo(0, 0);
   } else {
     cs.classList.remove('active');
@@ -423,7 +425,8 @@ function route(){
     document.title = 'Valeriy Protsenko — Design Engineer';
     if (location.hash || location.search) history.replaceState(null, '', location.pathname);
     const y = homeScroll;
-    requestAnimationFrame(() => window.scrollTo(0, y));
+    if (window.smoothStop) smoothStop();
+    requestAnimationFrame(() => { window.scrollTo(0, y); if (window.smoothStop) smoothStop(); });
   }
   updateHeaderHeight();
 }
@@ -457,6 +460,31 @@ function updateHeaderHeight(){
 }
 window.addEventListener('resize', updateHeaderHeight);
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(updateHeaderHeight);
+
+/* ─── SMOOTH WHEEL SCROLL (desktop mouse/trackpad only, light easing) ─── */
+(function(){
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches || matchMedia('(pointer: coarse)').matches) return;
+  const EASE = 0.14;            // 0.1 = smoother, 0.2 = closer to native
+  let target = scrollY, current = scrollY, raf = null;
+  const maxY = () => document.documentElement.scrollHeight - innerHeight;
+  function tick(){
+    current += (target - current) * EASE;
+    if (Math.abs(target - current) < 0.5) { current = target; raf = null; }
+    else raf = requestAnimationFrame(tick);
+    window.scrollTo(0, current);
+  }
+  window.addEventListener('wheel', e => {
+    if (e.ctrlKey || Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    if (document.getElementById('lb').classList.contains('open')) return;
+    e.preventDefault();
+    const d = e.deltaMode === 1 ? e.deltaY * 16 : e.deltaMode === 2 ? e.deltaY * innerHeight : e.deltaY;
+    if (!raf) { current = target = scrollY; }
+    target = Math.max(0, Math.min(maxY(), target + d));
+    if (!raf) raf = requestAnimationFrame(tick);
+  }, { passive: false });
+  window.addEventListener('scroll', () => { if (!raf) target = current = scrollY; }, { passive: true });
+  window.smoothStop = () => { if (raf) { cancelAnimationFrame(raf); raf = null; } target = current = scrollY; };
+})();
 
 /* ─── INIT ─── */
 renderHome();
