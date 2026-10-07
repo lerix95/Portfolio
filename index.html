@@ -85,6 +85,9 @@ img.media{cursor:zoom-in}
 .video-frame video{width:34.43%;aspect-ratio:303/606;height:auto;object-fit:cover}
 .cap{margin-top:12px;text-align:center;font-size:16px;line-height:24px;color:var(--secondary)}
 
+/* ─── SQUIRCLE: JS draws Figma-style smoothed corners via clip-path ─── */
+.sq{border-radius:0!important}
+
 /* ─── LIGHTBOX ─── */
 .lb{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.9);align-items:center;justify-content:center;cursor:zoom-out;padding:4vh 4vw}
 .lb.open{display:flex}
@@ -392,7 +395,9 @@ function renderCase(id){
     (s.items || []).forEach(it => { h += renderItem(it); });
     h += `</section>`;
   });
-  document.getElementById('caseContent').innerHTML = h;
+  const box = document.getElementById('caseContent');
+  box.innerHTML = h;
+  if (typeof applySquircles === 'function') applySquircles(box);
 }
 
 /* ─── ROUTING: lerix.pro = home, lerix.pro/#finity = case ─── */
@@ -486,8 +491,56 @@ if (document.fonts && document.fonts.ready) document.fonts.ready.then(updateHead
   window.smoothStop = () => { if (raf) { cancelAnimationFrame(raf); raf = null; } target = current = scrollY; };
 })();
 
+/* ─── CORNER SMOOTHING 60% (same math as Figma) ───
+   Radius: home cards 32px, case images 64px, mobile 24px. */
+const SMOOTHING = 0.6;
+function squirclePath(w, h, R, s){
+  R = Math.min(R, w / 2, h / 2);
+  const budget = Math.min(w, h) / 2;
+  let p = (1 + s) * R;
+  if (p > budget) { s = Math.max(0, Math.min(s, budget / R - 1)); p = Math.min(p, budget); }
+  const rad = x => x * Math.PI / 180;
+  const arcMeasure = 90 * (1 - s);
+  const arc = Math.sin(rad(arcMeasure / 2)) * R * Math.SQRT2;
+  const alpha = (90 - arcMeasure) / 2;
+  const p34 = R * Math.tan(rad(alpha / 2));
+  const beta = 45 * s;
+  const c = p34 * Math.cos(rad(beta));
+  const d = c * Math.tan(rad(beta));
+  const b = (p - arc - c - d) / 3;
+  const a = 2 * b;
+  const f = n => +n.toFixed(2);
+  const [A, B, C, D, P, ARC, RR] = [a, a + b, a + b + c, d, p, arc, R].map(f), BC = f(b + c);
+  return `M ${f(w - P)} 0 c ${A} 0 ${B} 0 ${C} ${D} a ${RR} ${RR} 0 0 1 ${ARC} ${ARC} c ${D} ${f(c)} ${D} ${BC} ${D} ${C}`
+    + ` L ${w} ${f(h - P)} c 0 ${A} 0 ${B} ${-D} ${C} a ${RR} ${RR} 0 0 1 ${-ARC} ${ARC} c ${f(-c)} ${D} ${-BC} ${D} ${-C} ${D}`
+    + ` L ${P} ${h} c ${-A} 0 ${-B} 0 ${-C} ${-D} a ${RR} ${RR} 0 0 1 ${-ARC} ${-ARC} c ${-D} ${f(-c)} ${-D} ${-BC} ${-D} ${-C}`
+    + ` L 0 ${P} c 0 ${-A} 0 ${-B} ${D} ${-C} a ${RR} ${RR} 0 0 1 ${ARC} ${-ARC} c ${f(c)} ${-D} ${BC} ${-D} ${C} ${-D} Z`;
+}
+const mobileMQ = matchMedia('(max-width:768px)');
+function radiusFor(el){
+  if (mobileMQ.matches) return 24;
+  return el.classList.contains('card-img') ? 32 : 64;
+}
+const sqSupported = window.CSS && CSS.supports('clip-path', 'path("M0 0 L1 0 L1 1 Z")');
+const sqObserver = sqSupported ? new ResizeObserver(entries => {
+  entries.forEach(e => {
+    const el = e.target, w = el.offsetWidth, h = el.offsetHeight;
+    if (!w || !h) return;
+    el.style.clipPath = `path("${squirclePath(w, h, radiusFor(el), SMOOTHING)}")`;
+    el.classList.add('sq');
+  });
+}) : null;
+function applySquircles(root){
+  if (!sqObserver) return;
+  root.querySelectorAll('.card-img, .c-cover, img.media:not(.flat), .video-frame').forEach(el => sqObserver.observe(el));
+}
+mobileMQ.addEventListener && mobileMQ.addEventListener('change', () => {
+  document.querySelectorAll('.sq').forEach(el => { sqObserver.unobserve(el); sqObserver.observe(el); });
+});
+
 /* ─── INIT ─── */
 renderHome();
+applySquircles(document.getElementById('grid'));
 route();
 </script>
 </body>
