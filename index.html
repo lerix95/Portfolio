@@ -83,6 +83,8 @@ img.media{cursor:zoom-in}
 .media.flat{border-radius:0!important;background:none}
 .video-frame{width:100%;aspect-ratio:880/731;background:#000;border-radius:64px;overflow:hidden;display:flex;align-items:center;justify-content:center}
 .video-frame video{width:34.43%;aspect-ratio:303/606;height:auto;object-fit:cover}
+.video-frame.phone{background:var(--card)}
+.video-frame.phone video{width:34.09%;aspect-ratio:300/611;object-fit:contain}
 .cap{margin-top:12px;text-align:center;font-size:16px;line-height:24px;color:var(--secondary)}
 
 /* ─── SQUIRCLE: JS draws Figma-style smoothed corners via clip-path ─── */
@@ -355,11 +357,42 @@ const CASES = {
         items: [{ img: "EasyTravel9.webp", flat: true }, { img: "EasyTravel10.webp", flat: true }, { img: "EasyTravel11.webp", flat: true }] },
       { title: "Result", desc: "I ended up with a dev-ready MVP. I didn't reinvent the wheel: I used the official iOS 17 UIKit, so the app feels familiar to Apple users and developers can build it faster and cheaper. Thanks to competitive analysis and the customer journey map, the app is logical and ready for launch and its first tests with real users." }
     ]
+  },
+  'history-rf': {
+    title: "History RF", sub: "Education app, 2022", cover: "HistoryCover.webp",
+    intro: [
+      "Task: Redesign a history app based on user reviews.",
+      "About the project: A free app by the Russian Military Historical Society with articles, lectures and tests.",
+      "What I did: I studied the reviews, redesigned the interface and designed audio guides and walks."
+    ],
+    sections: [
+      { title: "Article", desc: "Easy-to-read type, contents and reading progress.",
+        items: [{ img: "History1.webp", cap: "Article and contents." }] },
+      { title: "Reading Themes", desc: "Three reading themes, one tap to switch. The dark one works across the whole app.",
+        items: [{ video: "history-themes.mp4", phone: true, cap: "Light, sepia and dark." }] },
+      { title: "Catalog", desc: "All content in one feed with quick filters.",
+        items: [{ img: "History2.webp", cap: "Feed and filters." }] },
+      { title: "Audio and Video Lectures", desc: "Simple players with speed control and 15-second skips.",
+        items: [{ img: "History3.webp", cap: "Audio and video lectures." }] },
+      { title: "Tests", desc: "One question per screen and a clear result.",
+        items: [{ img: "History4.webp", cap: "Question and result." }] },
+      { title: "Audio Guides", desc: "New feature: routes on a map with stops and a player.",
+        items: [{ img: "History5.webp", cap: "Route details and active route." }] },
+      { title: "Walks", desc: "New feature: historic places nearby. Stories play when you get close.",
+        items: [{ img: "History6.webp", cap: "Map and selected place." }] },
+      { title: "Sign In and Profile", desc: "Quick sign-up and simple profile settings.",
+        items: [{ img: "History7.webp", cap: "Sign-up and profile settings." }] },
+      { title: "Dark Mode", desc: "The whole app in dark — the most requested feature.",
+        items: [{ img: "History8.webp", cap: "Catalog and test result." }] },
+      { title: "User Reviews", desc: "Reviews from App Store and Google Play before and after the redesign.",
+        items: [{ img: "History9.webp", cap: "We collected user requests and built the redesign on them." }] },
+      { title: "Result", desc: "The redesign and new features raised the App Store rating from 2.7 to 3.9." }
+    ]
   }
 };
 
 /* Order of cards on the home page. 'soon' renders the placeholder card. */
-const HOME_ORDER = ['health-ring','pony-express','mbank','finity','orbitame','kamzumi','easy-travel','soon'];
+const HOME_ORDER = ['health-ring','pony-express','mbank','finity','orbitame','kamzumi','easy-travel','history-rf'];
 
 /* Old v1 links keep working (#case-finity, #bank, ...) */
 const ALIASES = { 'bank':'mbank', 'case-bank':'mbank' };
@@ -381,7 +414,7 @@ function renderHome(){
 /* ─── CASE ─── */
 function renderItem(it){
   const media = it.video
-    ? `<div class="video-frame"><video src="${A + it.video}" autoplay muted loop playsinline preload="auto"></video></div>`
+    ? `<div class="video-frame${it.phone ? ' phone' : ''}"><video src="${A + it.video}" autoplay muted loop playsinline preload="auto"></video></div>`
     : `<img class="media${it.flat ? ' flat' : ''}" src="${A + it.img}" alt="" loading="lazy">`;
   return `<div class="c-item">${media}${it.cap ? `<p class="cap">${it.cap}</p>` : ''}</div>`;
 }
